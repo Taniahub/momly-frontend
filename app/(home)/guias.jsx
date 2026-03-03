@@ -4,8 +4,10 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { colors } from '../../constants/colors';
+import { authService } from '../../services/api'; // ajusta la ruta si cambia
+
 
 export default function GuiasScreen() {
   const router = useRouter();
@@ -18,22 +20,24 @@ export default function GuiasScreen() {
     cargarGuias();
   }, []);
 
-  const cargarGuias = async () => {
-    try {
-      const response = await axios.get('http://https://momly-backend.onrender.com./api/auth/guias');
-      setCategorias(response.data.data);
-      if (response.data.data.length > 0) {
-        setCategoriaActiva(response.data.data[0].id_categoria);
-      }
-    } catch (error) {
-      console.error('Error cargando guías:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
+const cargarGuias = async () => {
+  try {
+    const response = await authService.getGuias();
+    const data = response?.data?.data || [];
+
+    setCategorias(data);
+    setCategoriaActiva(data.length > 0 ? data[0].id_categoria : null);
+  } catch (error) {
+    console.error("Error cargando guías:", error?.response?.data || error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const categoriaActivaData = categorias.find(c => c.id_categoria === categoriaActiva);
 
+  
   if (guiaSeleccionada) {
     return (
       <View style={styles.container}>
@@ -125,19 +129,26 @@ export default function GuiasScreen() {
           </View>
 
           {/* Lista de guías */}
-          {categoriaActivaData?.guias.map(guia => (
-            <TouchableOpacity
-              key={guia.id_contenido}
-              style={styles.guiaCard}
-              onPress={() => setGuiaSeleccionada(guia)}
-            >
-              <View style={styles.guiaCardContent}>
-                <Text style={styles.guiaTitulo}>{guia.titulo}</Text>
-                <Text style={styles.guiaDesc} numberOfLines={2}>{guia.descripcion}</Text>
-              </View>
-              <Text style={styles.guiaArrow}>→</Text>
-            </TouchableOpacity>
-          ))}
+          
+{(!categoriaActivaData || !categoriaActivaData.guias || categoriaActivaData.guias.length === 0) ? (
+  <Text style={{ textAlign: 'center', color: colors.textMedium, marginTop: 20 }}>
+    No hay guías en esta categoría aún.
+  </Text>
+) : (
+  categoriaActivaData.guias.map(guia => (
+    <TouchableOpacity
+      key={guia.id_contenido}
+      style={styles.guiaCard}
+      onPress={() => setGuiaSeleccionada(guia)}
+    >
+      <View style={styles.guiaCardContent}>
+        <Text style={styles.guiaTitulo}>{guia.titulo}</Text>
+        <Text style={styles.guiaDesc} numberOfLines={2}>{guia.descripcion}</Text>
+      </View>
+      <Text style={styles.guiaArrow}>→</Text>
+    </TouchableOpacity>
+  ))
+)}
         </ScrollView>
       )}
 
