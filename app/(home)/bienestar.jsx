@@ -51,7 +51,7 @@ export default function BienestarScreen() {
 
   const cargarHistorial = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/bienestar/${id}`);
+      const response = await axios.get(`http://https://momly-backend.onrender.com./api/auth/bienestar/${id}`);
       const data = response.data.data;
       setRegistros(data);
 
@@ -71,7 +71,7 @@ export default function BienestarScreen() {
     }
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/api/auth/bienestar', {
+      await axios.post('http://https://momly-backend.onrender.com./api/auth/bienestar', {
         id_usuario: usuario.id,
         estado_emocional: estadoSeleccionado,
         nivel_descanso: nivelDescanso,

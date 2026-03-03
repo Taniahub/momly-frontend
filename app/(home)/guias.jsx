@@ -20,7 +20,7 @@ export default function GuiasScreen() {
 
   const cargarGuias = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/guias');
+      const response = await axios.get('http://https://momly-backend.onrender.com./api/auth/guias');
       setCategorias(response.data.data);
       if (response.data.data.length > 0) {
         setCategoriaActiva(response.data.data[0].id_categoria);

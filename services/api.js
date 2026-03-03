@@ -1,7 +1,10 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const BASE_URL = 'http://localhost:3000/api';
+export const api = axios.create({
+  baseURL: "https://momly-backend.onrender.com",
+  timeout: 15000,
+});
 
 const api = axios.create({
   baseURL: BASE_URL,
