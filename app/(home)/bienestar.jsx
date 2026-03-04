@@ -121,6 +121,9 @@ const handleGuardar = async () => {
             
                   {/* Banner rosa */}
                   <View style={styles.banner}>
+                     <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
+                      <Text style={styles.backText}>← Volver</Text>
+                    </TouchableOpacity>
                     <Text style={styles.bannerTitle}>MOMLY</Text>
                     <Text style={styles.bannerSlogan}>Contigo en cada primer paso</Text>
                   </View>
@@ -294,6 +297,10 @@ slogan: {
   letterSpacing: -0.5,
 
   },
+
+  backBtn: { width: 80 },
+  backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
+
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
