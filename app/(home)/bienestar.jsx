@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import api from '../../services/api';
 
 const ESTADOS = [
   { emoji: '😄', label: 'Excelente', valor: 'excelente' },
@@ -51,7 +51,7 @@ export default function BienestarScreen() {
 
   const cargarHistorial = async (id) => {
     try {
-      const response = await axios.get(`http://https://momly-backend.onrender.com./api/auth/bienestar/${id}`);
+      const response = await api.get(`/auth/bienestar/${id}`);
       const data = response.data.data;
       setRegistros(data);
 
@@ -64,27 +64,27 @@ export default function BienestarScreen() {
     }
   };
 
-  const handleGuardar = async () => {
-    if (!estadoSeleccionado || !nivelDescanso || !nivelEnergia) {
-      if (Platform.OS === 'web') window.alert('Por favor completa todos los campos');
-      return;
-    }
-    setLoading(true);
-    try {
-      await axios.post('http://https://momly-backend.onrender.com./api/auth/bienestar', {
-        id_usuario: usuario.id,
-        estado_emocional: estadoSeleccionado,
-        nivel_descanso: nivelDescanso,
-        nivel_energia: nivelEnergia,
-        nota,
-      });
-      cargarHistorial(usuario.id);
-    } catch (error) {
-      console.error('Error guardando:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleGuardar = async () => {
+  if (!estadoSeleccionado || !nivelDescanso || !nivelEnergia) {
+    if (Platform.OS === 'web') window.alert('Por favor completa todos los campos');
+    return;
+  }
+  setLoading(true);
+  try {
+    await api.post('/auth/bienestar', {
+      id_usuario: usuario.id,
+      estado_emocional: estadoSeleccionado,
+      nivel_descanso: nivelDescanso,
+      nivel_energia: nivelEnergia,
+      nota,
+    });
+    cargarHistorial(usuario.id);
+  } catch (error) {
+    console.error('Error guardando:', error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const Escala = ({ valor, onChange, label }) => (
     <View style={styles.escalaContainer}>
