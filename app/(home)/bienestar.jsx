@@ -55,7 +55,6 @@ export default function BienestarScreen() {
       const data = response.data.data;
       setRegistros(data);
 
-      // Verificar si ya registró hoy
       const hoy = new Date().toISOString().split('T')[0];
       const hoyRegistro = data.find(r => r.fecha_registro?.toString().startsWith(hoy));
       if (hoyRegistro) setRegistroHoy(hoyRegistro);
@@ -64,27 +63,27 @@ export default function BienestarScreen() {
     }
   };
 
-const handleGuardar = async () => {
-  if (!estadoSeleccionado || !nivelDescanso || !nivelEnergia) {
-    if (Platform.OS === 'web') window.alert('Por favor completa todos los campos');
-    return;
-  }
-  setLoading(true);
-  try {
-    await api.post('/auth/bienestar', {
-      id_usuario: usuario.id,
-      estado_emocional: estadoSeleccionado,
-      nivel_descanso: nivelDescanso,
-      nivel_energia: nivelEnergia,
-      nota,
-    });
-    cargarHistorial(usuario.id);
-  } catch (error) {
-    console.error('Error guardando:', error);
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleGuardar = async () => {
+    if (!estadoSeleccionado || !nivelDescanso || !nivelEnergia) {
+      if (Platform.OS === 'web') window.alert('Por favor completa todos los campos');
+      return;
+    }
+    setLoading(true);
+    try {
+      await api.post('/auth/bienestar', {
+        id_usuario: usuario.id,
+        estado_emocional: estadoSeleccionado,
+        nivel_descanso: nivelDescanso,
+        nivel_energia: nivelEnergia,
+        nota,
+      });
+      cargarHistorial(usuario.id);
+    } catch (error) {
+      console.error('Error guardando:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const Escala = ({ valor, onChange, label }) => (
     <View style={styles.escalaContainer}>
@@ -110,28 +109,30 @@ const handleGuardar = async () => {
   return (
     <View style={styles.container}>
       {/* Header */}
-                  <View style={styles.header}>
-                    <Image 
-                      source={require('../../assets/images/logo.png')} // Asegúrate de poner el nombre real de tu archivo
-                      style={styles.logoImagen}
-                      resizeMode="contain"
-                    />
-                    <Text style={styles.slogan}>contigo en cada primer paso.</Text>
-                  </View>
-            
-                  {/* Banner rosa */}
-                  <View style={styles.banner}>
-                     <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
-                      <Text style={styles.backText}>← Volver</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.bannerTitle}>MOMLY</Text>
-                    <Text style={styles.bannerSlogan}>Contigo en cada primer paso</Text>
-                  </View>
+      <View style={styles.header}>
+        <Image
+          source={require('../../assets/images/logo.png')}
+          style={styles.logoImagen}
+          resizeMode="contain"
+        />
+        <Text style={styles.slogan}>contigo en cada primer paso.</Text>
+      </View>
+
+      {/* Banner rosa */}
+      <View style={styles.banner}>
+        <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
+          <Text style={styles.backText}>← Volver</Text>
+        </TouchableOpacity>
+        <View style={styles.bannerCenter}>
+          <Text style={styles.bannerTitle}>M🌸MLY</Text>
+          <Text style={styles.bannerSlogan}>Bienestar Emocional</Text>
+        </View>
+        <View style={styles.backPlaceholder} />
+      </View>
 
       <ScrollView contentContainerStyle={styles.content}>
 
         {registroHoy ? (
-          // Ya registró hoy
           <View style={styles.card}>
             <Text style={styles.exitoEmoji}>✅</Text>
             <Text style={styles.cardTitle}>¡Ya registraste hoy!</Text>
@@ -162,7 +163,6 @@ const handleGuardar = async () => {
             </TouchableOpacity>
           </View>
         ) : (
-          // Formulario
           <View style={styles.card}>
             <Text style={styles.cardTitle}>¿Cómo te sientes hoy? 💆</Text>
             <Text style={styles.cardSubtitle}>Registra tu bienestar diario</Text>
@@ -237,76 +237,59 @@ const handleGuardar = async () => {
 
       </ScrollView>
 
- {/* Footer ultra compacto en dos columnas */}
+      {/* Footer */}
       <View style={styles.footerColumnas}>
-                       <View style={styles.columnaIzquierda}>
-                         <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
-                         <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
-                       </View>
-                       
-                       <View style={styles.columnaDerecha}>
-                         <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
-                         <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
-                       </View>
-                     </View>
+        <View style={styles.columnaIzquierda}>
+          <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+          <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+        </View>
+        <View style={styles.columnaDerecha}>
+          <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+          <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-// Header nav
+
+  // Header nav
   header: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingHorizontal: 20,
-  paddingTop: 5,
-  paddingBottom: 10,
-  backgroundColor: '#FFF1E6', // Rosa de fondo del header
-},
-logoImagen: {
-  width: 100,  // Ajusta según el ancho de tu nueva imagen
-  height: 40,  // Ajusta según el alto de tu nueva imagen
-},
-slogan: {
-  fontSize: 11,
-  color: colors.textMedium,
-  fontFamily: 'Montserrat', // Corregido de fontStyle a fontFamily
-},
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 5,
+    paddingBottom: 10,
+    backgroundColor: '#FFF1E6',
+  },
+  logoImagen: {
+    width: 100,
+    height: 40,
+  },
+  slogan: {
+    fontSize: 11,
+    color: colors.textMedium,
+    fontFamily: 'Montserrat',
+  },
 
   // Banner
   banner: {
     backgroundColor: colors.primary,
-    paddingVertical: 5,
+    paddingVertical: 12,
+    flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 16,
   },
-  bannerTitle: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#5e5d5d' ,
-    letterSpacing: 4,
-  },
-  bannerSlogan: {
-    fontSize: 25,
-    color: '#5e5d5d' ,
-    marginTop: 5,
-    fontStyle: 'Montserrat-SemiBold',
-  fontWeight: '600',
-  textAlign: 'center',
-  letterSpacing: -0.5,
-
-  },
-
-  backBtn: { width: 80 },
-  backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
-
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
   bannerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
   bannerSlogan: { fontSize: 12, color: colors.white, marginTop: 2 },
   backPlaceholder: { width: 80 },
+
   content: { padding: 24 },
 
   card: {
@@ -398,37 +381,20 @@ slogan: {
   historialNivel: { fontSize: 12, color: colors.textMedium },
   historialNota: { fontSize: 12, color: colors.textMedium, fontStyle: 'italic' },
 
-  // Footer estilo "App Pro"
+  // Footer
   footerColumnas: {
-    backgroundColor: '#FADBD8', // Rosa suave MOMLY
-    flexDirection: 'row',       // Esto crea las dos columnas
-    justifyContent: 'space-between', 
+    backgroundColor: '#FADBD8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 8,         // Espacio mínimo vertical
+    paddingVertical: 8,
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.05)',
   },
-  columnaIzquierda: {
-    flex: 1,
-  },
-  columnaDerecha: {
-    flex: 1,
-    alignItems: 'flex-end',    // Alinea el texto legal a la derecha
-  },
-  footerTextMin: {
-    color: '#5D6D7E',          // Gris marca
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  footerSloganMin: {
-    color: '#04080c',
-    fontSize: 15,
-    opacity: 0.8,
-  },
-  footerLegalMin: {
-    color: '#04080c',
-    fontSize: 15,
-    opacity: 0.7,
-    textAlign: 'right',
-  },});
+  columnaIzquierda: { flex: 1 },
+  columnaDerecha: { flex: 1, alignItems: 'flex-end' },
+  footerTextMin: { color: '#5D6D7E', fontSize: 20, fontWeight: 'bold' },
+  footerSloganMin: { color: '#04080c', fontSize: 15, opacity: 0.8 },
+  footerLegalMin: { color: '#04080c', fontSize: 15, opacity: 0.7, textAlign: 'right' },
+});
