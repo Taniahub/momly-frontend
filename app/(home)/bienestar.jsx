@@ -124,7 +124,7 @@ export default function BienestarScreen() {
     <Text style={styles.backText}>← Volver</Text>
   </TouchableOpacity>
   <View style={styles.bannerCenter}>
-    <Text style={styles.bannerTitle}>M🌸MLY</Text>
+    <Text style={styles.bannerTitle}>MOMLY</Text>
     <Text style={styles.bannerSlogan}>Bienestar Emocional</Text>
   </View>
   <View style={styles.backPlaceholder} />
