@@ -120,15 +120,12 @@ export default function BienestarScreen() {
 
       {/* Banner rosa */}
       <View style={styles.banner}>
-        <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
-          <Text style={styles.backText}>← Volver</Text>
-        </TouchableOpacity>
-        <View style={styles.bannerCenter}>
-          <Text style={styles.bannerTitle}>M🌸MLY</Text>
-          <Text style={styles.bannerSlogan}>Bienestar Emocional</Text>
-        </View>
-        <View style={styles.backPlaceholder} />
-      </View>
+  <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
+    <Text style={styles.backText}>← Volver</Text>
+  </TouchableOpacity>
+  <Text style={styles.bannerTitle}>M🌸MLY</Text>
+  <Text style={styles.bannerSlogan}>Bienestar Emocional</Text>
+</View>
 
       <ScrollView contentContainerStyle={styles.content}>
 
@@ -277,12 +274,11 @@ const styles = StyleSheet.create({
 
   // Banner
   banner: {
-    backgroundColor: colors.primary,
-    paddingVertical: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-  },
+  backgroundColor: colors.primary,
+  paddingVertical: 12,
+  paddingHorizontal: 16,
+  alignItems: 'flex-start', 
+},
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
