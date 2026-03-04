@@ -123,7 +123,7 @@ export default function BienestarScreen() {
   <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
     <Text style={styles.backText}>← Volver</Text>
   </TouchableOpacity>
-  <Text style={styles.bannerTitle}>M🌸MLY</Text>
+  <Text style={styles.bannerTitle}>MOMLY</Text>
   <Text style={styles.bannerSlogan}>Bienestar Emocional</Text>
 </View>
 
@@ -280,10 +280,10 @@ const styles = StyleSheet.create({
   alignItems: 'flex-start', 
 },
   backBtn: { width: 80 },
-  backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
+  backText: { color: '#5e5d5d', fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
   bannerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
-  bannerSlogan: { fontSize: 12, color: colors.white, marginTop: 2 },
+  bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 2 },
   backPlaceholder: { width: 80 },
 
   content: { padding: 24 },
