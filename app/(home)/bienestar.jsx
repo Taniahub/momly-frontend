@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
 backBtn: { width: 80 },      // ← flecha a la izquierda
 backText: { color: '#5e5d5d', fontSize: 14, fontWeight: '600' },
 bannerCenter: { flex: 1, alignItems: 'center' },  // ← título centrado
-bannerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
+bannerTitle: { fontSize: 28, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
 bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 2 },
 backPlaceholder: { width: 80 },  // ← equilibra el espacio derecho
 
