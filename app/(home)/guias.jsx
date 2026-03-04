@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 
 import { colors } from '../../constants/colors';
-import { authService } from '../../services/api'; // ajusta la ruta si cambia
+import { authService } from '../../services/api';
 
 
 export default function GuiasScreen() {
@@ -20,42 +20,50 @@ export default function GuiasScreen() {
     cargarGuias();
   }, []);
 
-  
-const cargarGuias = async () => {
-  try {
-    const response = await authService.getGuias();
-    const data = response?.data?.data || [];
-
-    setCategorias(data);
-    setCategoriaActiva(data.length > 0 ? data[0].id_categoria : null);
-  } catch (error) {
-    console.error("Error cargando guías:", error?.response?.data || error.message);
-  } finally {
-    setLoading(false);
-  }
-};
+  const cargarGuias = async () => {
+    try {
+      const response = await authService.getGuias();
+      const data = response?.data?.data || [];
+      setCategorias(data);
+      setCategoriaActiva(data.length > 0 ? data[0].id_categoria : null);
+    } catch (error) {
+      console.error("Error cargando guías:", error?.response?.data || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const categoriaActivaData = categorias.find(c => c.id_categoria === categoriaActiva);
 
-  
+  // Banner reutilizable
+  const Banner = ({ onBack }) => (
+    <View style={styles.banner}>
+      <TouchableOpacity style={styles.backBtn} onPress={onBack}>
+        <Text style={styles.backText}>← Volver</Text>
+      </TouchableOpacity>
+      <View style={styles.bannerCenter}>
+        <Text style={styles.bannerTitle}>MOMLY</Text>
+        <Text style={styles.bannerSlogan}>Contigo en cada primer paso</Text>
+      </View>
+      <View style={styles.backPlaceholder} />
+    </View>
+  );
+
   if (guiaSeleccionada) {
     return (
       <View style={styles.container}>
-            {/* Header */}
-                    <View style={styles.header}>
-                      <Image 
-                        source={require('../../assets/images/logo.png')} // Asegúrate de poner el nombre real de tu archivo
-                        style={styles.logoImagen}
-                        resizeMode="contain"
-                      />
-                      <Text style={styles.slogan}>contigo en cada primer paso.</Text>
-                    </View>
-              
-                    {/* Banner rosa */}
-                    <View style={styles.banner}>
-                      <Text style={styles.bannerTitle}>MOMLY</Text>
-                      <Text style={styles.bannerSlogan}>Contigo en cada primer paso</Text>
-                    </View>
+        {/* Header */}
+        <View style={styles.header}>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={styles.logoImagen}
+            resizeMode="contain"
+          />
+          <Text style={styles.slogan}>contigo en cada primer paso.</Text>
+        </View>
+
+        {/* Banner con ← Volver que regresa a la lista de guías */}
+        <Banner onBack={() => setGuiaSeleccionada(null)} />
 
         <ScrollView contentContainerStyle={styles.detalleContent}>
           <View style={styles.detalleCard}>
@@ -75,33 +83,18 @@ const cargarGuias = async () => {
 
   return (
     <View style={styles.container}>
-      {/* Header superior */}
-<View style={styles.header}>
-  <Image 
-    source={require('../../assets/images/logo.png')}
-    style={styles.logoImagen}
-    resizeMode="contain"
-  />
-  <Text style={styles.slogan}>contigo en cada primer paso.</Text>
-</View>
+      {/* Header */}
+      <View style={styles.header}>
+        <Image
+          source={require('../../assets/images/logo.png')}
+          style={styles.logoImagen}
+          resizeMode="contain"
+        />
+        <Text style={styles.slogan}>contigo en cada primer paso.</Text>
+      </View>
 
-{/* Banner rosa con flecha */}
-<View style={styles.banner}>
-  <TouchableOpacity 
-    style={styles.backButton}
-    onPress={() => router.replace('/(home)')}
-  >
-    <Text style={styles.backIcon}>←</Text>
-  </TouchableOpacity>
-
-  <View style={styles.bannerCenter}>
-    <Text style={styles.bannerTitle}>MOMLY</Text>
-    <Text style={styles.bannerSlogan}>Contigo en cada primer paso</Text>
-  </View>
-
-  {/* Espacio vacío para centrar */}
-  <View style={{ width: 30 }} />
-</View>
+      {/* Banner con ← Volver que regresa al home */}
+      <Banner onBack={() => router.replace('/(home)')} />
 
       {loading ? (
         <View style={styles.loadingContainer}>
@@ -129,106 +122,72 @@ const cargarGuias = async () => {
           </View>
 
           {/* Lista de guías */}
-          
-{(!categoriaActivaData || !categoriaActivaData.guias || categoriaActivaData.guias.length === 0) ? (
-  <Text style={{ textAlign: 'center', color: colors.textMedium, marginTop: 20 }}>
-    No hay guías en esta categoría aún.
-  </Text>
-) : (
-  categoriaActivaData.guias.map(guia => (
-    <TouchableOpacity
-      key={guia.id_contenido}
-      style={styles.guiaCard}
-      onPress={() => setGuiaSeleccionada(guia)}
-    >
-      <View style={styles.guiaCardContent}>
-        <Text style={styles.guiaTitulo}>{guia.titulo}</Text>
-        <Text style={styles.guiaDesc} numberOfLines={2}>{guia.descripcion}</Text>
-      </View>
-      <Text style={styles.guiaArrow}>→</Text>
-    </TouchableOpacity>
-  ))
-)}
+          {(!categoriaActivaData || !categoriaActivaData.guias || categoriaActivaData.guias.length === 0) ? (
+            <Text style={{ textAlign: 'center', color: colors.textMedium, marginTop: 20 }}>
+              No hay guías en esta categoría aún.
+            </Text>
+          ) : (
+            categoriaActivaData.guias.map(guia => (
+              <TouchableOpacity
+                key={guia.id_contenido}
+                style={styles.guiaCard}
+                onPress={() => setGuiaSeleccionada(guia)}
+              >
+                <View style={styles.guiaCardContent}>
+                  <Text style={styles.guiaTitulo}>{guia.titulo}</Text>
+                  <Text style={styles.guiaDesc} numberOfLines={2}>{guia.descripcion}</Text>
+                </View>
+                <Text style={styles.guiaArrow}>→</Text>
+              </TouchableOpacity>
+            ))
+          )}
         </ScrollView>
       )}
 
-     {/* Footer ultra compacto en dos columnas */}
-                        <View style={styles.footerColumnas}>
-                          <View style={styles.columnaIzquierda}>
-                            <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
-                            <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
-                          </View>
-                          
-                          <View style={styles.columnaDerecha}>
-                            <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
-                            <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
-                          </View>
-                        </View>
+      {/* Footer */}
+      <View style={styles.footerColumnas}>
+        <View style={styles.columnaIzquierda}>
+          <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+          <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+        </View>
+        <View style={styles.columnaDerecha}>
+          <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+          <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },
-header: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingHorizontal: 20,
-  paddingTop: 5,
-  paddingBottom: 10,
-  backgroundColor: '#FFF1E6',
-},
 
-logoImagen: {
-  width: 100,
-  height: 40,
-},
+  // Header
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 5,
+    paddingBottom: 10,
+    backgroundColor: '#FFF1E6',
+  },
+  logoImagen: { width: 100, height: 40 },
+  slogan: { fontSize: 11, color: colors.textMedium },
 
-slogan: {
-  fontSize: 11,
-  color: colors.textMedium,
-},
-
-banner: {
-  backgroundColor: colors.primary,
-  paddingVertical: 14,
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  paddingHorizontal: 16,
-},
-
-backButton: {
-  width: 30,
-},
-
-backIcon: {
-  color: colors.white,
-  fontSize: 22,
-  fontWeight: 'bold',
-},
-
-bannerCenter: {
-  alignItems: 'center',
-  flex: 1,
-},
-
-bannerTitle: {
-  fontSize: 28,
-  fontWeight: 'bold',
-  color: '#5e5d5d',
-  letterSpacing: 4,
-},
-
-bannerSlogan: {
-  fontSize: 12,
-  color: '#5e5d5d',
-  marginTop: 2,
-},
+  // Banner
+  banner: {
+    backgroundColor: colors.primary,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
+  bannerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
+  bannerSlogan: { fontSize: 12, color: colors.white, marginTop: 2 },
   backPlaceholder: { width: 80 },
 
   loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
@@ -275,37 +234,20 @@ bannerSlogan: {
   },
   detalleExtraTexto: { fontSize: 13, color: colors.textDark, lineHeight: 20, fontStyle: 'italic' },
 
-   // Footer estilo "App Pro"
+  // Footer
   footerColumnas: {
-    backgroundColor: '#FADBD8', // Rosa suave MOMLY
-    flexDirection: 'row',       // Esto crea las dos columnas
-    justifyContent: 'space-between', 
+    backgroundColor: '#FADBD8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 8,         // Espacio mínimo vertical
+    paddingVertical: 8,
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.05)',
   },
-  columnaIzquierda: {
-    flex: 1,
-  },
-  columnaDerecha: {
-    flex: 1,
-    alignItems: 'flex-end',    // Alinea el texto legal a la derecha
-  },
-  footerTextMin: {
-    color: '#5D6D7E',          // Gris marca
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  footerSloganMin: {
-    color: '#04080c',
-    fontSize: 15,
-    opacity: 0.8,
-  },
-  footerLegalMin: {
-    color: '#04080c',
-    fontSize: 15,
-    opacity: 0.7,
-    textAlign: 'right',
-  },});
+  columnaIzquierda: { flex: 1 },
+  columnaDerecha: { flex: 1, alignItems: 'flex-end' },
+  footerTextMin: { color: '#5D6D7E', fontSize: 20, fontWeight: 'bold' },
+  footerSloganMin: { color: '#04080c', fontSize: 15, opacity: 0.8 },
+  footerLegalMin: { color: '#04080c', fontSize: 15, opacity: 0.7, textAlign: 'right' },
+});
