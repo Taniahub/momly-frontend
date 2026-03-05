@@ -184,10 +184,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backBtn: { width: 80 },
-  backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
+  backText: { color: '#5e5d5d', fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
-  bannerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
-  bannerSlogan: { fontSize: 12, color: colors.white, marginTop: 2 },
+  bannerTitle: { fontSize: 28, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
+  bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 2 },
   backPlaceholder: { width: 80 },
 
   loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
