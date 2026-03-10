@@ -8,7 +8,7 @@ import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authService } from '../../services/api';
 import { colors } from '../../constants/colors';
-import { View, Text, Alert } from 'react-native';
+import { authService, api } from '../../services/api';
 
 
 export default function RegistroScreen() {
