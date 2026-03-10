@@ -6,7 +6,6 @@ import {
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { authService } from '../../services/api';
 import { colors } from '../../constants/colors';
 import { authService, api } from '../../services/api';
 
