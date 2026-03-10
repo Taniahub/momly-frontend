@@ -67,10 +67,20 @@ export default function RegistroScreen() {
     return Object.keys(e).length === 0;
   };
 
-  const handleSiguiente = () => {
-    if (!validarPaso1()) return;
+  const handleSiguiente = async () => {
+  if (!validarPaso1()) return;
+  
+  setLoading(true);
+  try {
+    await api.post('/auth/verificar-correo', { correo });
     setErrores({});
     setPaso(2);
+  } catch (error) {
+    const mensaje = error.response?.data?.mensaje || 'Error al verificar correo';
+    setErrores({ ...errores, correo: mensaje });
+  } finally {
+    setLoading(false);
+  }
   };
 
   const handleFechaChange = (text) => {
