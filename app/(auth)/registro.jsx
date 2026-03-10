@@ -8,6 +8,7 @@ import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authService } from '../../services/api';
 import { colors } from '../../constants/colors';
+import { View, Text, Alert } from 'react-native';
 
 
 export default function RegistroScreen() {
@@ -29,17 +30,22 @@ export default function RegistroScreen() {
   const [errores, setErrores] = useState({});
 
   const validarPaso1 = () => {
-    const e = {};
-    if (!nombre) e.nombre = 'El nombre es obligatorio';
-    else if (nombre.length < 3) e.nombre = 'Mínimo 3 caracteres';
-    if (!correo) e.correo = 'El correo es obligatorio';
-    else if (!/\S+@\S+\.\S+/.test(correo)) e.correo = 'Ingresa un correo válido';
-    if (!password) e.password = 'La contraseña es obligatoria';
-    else if (password.length < 6) e.password = 'Mínimo 6 caracteres';
-    if (!confirmarPassword) e.confirmarPassword = 'Confirma tu contraseña';
-    else if (password !== confirmarPassword) e.confirmarPassword = 'Las contraseñas no coinciden';
-    setErrores(e);
-    return Object.keys(e).length === 0;
+  const e = {};
+  if (!nombre) e.nombre = 'El nombre es obligatorio';
+  else if (nombre.length < 3) e.nombre = 'Mínimo 3 caracteres';
+  
+  if (!correo) e.correo = 'El correo es obligatorio';
+  else if (!/^[^\s@]+@[^\s@]+\.(com|net|org|edu|mx|es|io|co)$/.test(correo.toLowerCase()))
+    e.correo = 'Ingresa un correo con dominio válido (ej: gmail.com)';
+  
+  if (!password) e.password = 'La contraseña es obligatoria';
+  else if (password.length < 6) e.password = 'Mínimo 6 caracteres';
+  
+  if (!confirmarPassword) e.confirmarPassword = 'Confirma tu contraseña';
+  else if (password !== confirmarPassword) e.confirmarPassword = 'Las contraseñas no coinciden';
+  
+  setErrores(e);
+  return Object.keys(e).length === 0;
   };
 
   const validarFecha = (fecha) => {
@@ -96,6 +102,9 @@ export default function RegistroScreen() {
       const mensaje = error.response?.data?.mensaje || 'Error al registrarse';
       if (Platform.OS === 'web') {
         window.alert(mensaje);
+      }else {
+        // ✅ Agrega esto
+        Alert.alert('Error', mensaje);
       }
     } finally {
       setLoading(false);
