@@ -52,7 +52,11 @@ export default function RegistroScreen() {
     if (!regex.test(fecha)) return false;
     const [dia, mes, anio] = fecha.split('/').map(Number);
     const date = new Date(anio, mes - 1, dia);
-    return date <= new Date() && date.getFullYear() > 2000;
+    const hoy = new Date();
+    const hace3anios = new Date();
+    hace3anios.setFullYear(hoy.getFullYear() - 3);
+    
+    return date <= hoy && date >= hace3anios;
   };
 
   const validarPaso2 = () => {
@@ -60,7 +64,8 @@ export default function RegistroScreen() {
     if (!nombreBebe) e.nombreBebe = 'El nombre del bebé es obligatorio';
     else if (nombreBebe.length < 2) e.nombreBebe = 'Mínimo 2 caracteres';
     if (!fechaNacimiento) e.fechaNacimiento = 'La fecha de nacimiento es obligatoria';
-    else if (!validarFecha(fechaNacimiento)) e.fechaNacimiento = 'Ingresa una fecha válida (DD/MM/YYYY)';
+    else if (!validarFecha(fechaNacimiento)) 
+    e.fechaNacimiento = 'MOMLY es para bebés de 0 a 3 años 💕';
     if (!genero) e.genero = 'Selecciona el género del bebé';
     setErrores(e);
     return Object.keys(e).length === 0;
