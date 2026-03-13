@@ -75,7 +75,7 @@ export default function RegistroScreen() {
     setErrores({});
     setPaso(2);
   } catch (error) {
-    const mensaje = error.response?.data?.mensaje || 'Error al verificar correo';
+    const mensaje = error.response?.data?.mensaje || 'Este correo ya existe';
     setErrores({ ...errores, correo: mensaje });
   } finally {
     setLoading(false);
@@ -112,11 +112,11 @@ export default function RegistroScreen() {
       if (Platform.OS === 'web') {
         window.alert(mensaje);
       }else {
-        // ✅ Agrega esto
+        
         Alert.alert('Error', mensaje);
       }
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
