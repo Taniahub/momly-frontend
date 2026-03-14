@@ -40,21 +40,27 @@ export default function LoginScreen() {
   };
 
   const handleLogin = async () => {
-    if (!validar()) return;
-    setLoading(true);
-    try {
-      const response = await authService.login({ correo, password });
-      const { token, usuario } = response.data;
-      await AsyncStorage.setItem('token', token);
-      await AsyncStorage.setItem('usuario', JSON.stringify(usuario));
-      router.replace('/(home)');
-    } catch (error) {
-      const mensaje = error.response?.data?.mensaje || 'Error al iniciar sesión';
-      Alert.alert('Error', mensaje);
-    } finally {
-      setLoading(false);
+  if (!validar()) return;
+  setLoading(true);
+  try {
+    const response = await authService.login({ correo, password });
+    const { token, usuario } = response.data;
+    await AsyncStorage.setItem('token', token);
+    await AsyncStorage.setItem('usuario', JSON.stringify(usuario));
+
+    const bebeResponse = await api.get(`/auth/bebe/${usuario.id}`);
+    if (bebeResponse.data.ok) {
+      const bebe = bebeResponse.data.data;
+      await AsyncStorage.setItem('bebe', JSON.stringify({ id: bebe.id_bebe, nombre: bebe.nombre }));
     }
-  };
+    router.replace('/(home)');
+  } catch (error) {
+    const mensaje = error.response?.data?.mensaje || 'Error al iniciar sesión';
+    Alert.alert('Error', mensaje);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <View style={styles.container}>

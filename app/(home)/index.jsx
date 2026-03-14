@@ -79,6 +79,13 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/bienestar',
     },
+    {
+      emoji: '💉',
+      titulo: 'Calendario de Vacunación',
+      descripcion: 'Lleva el control de las vacunas de tu bebé',
+      disponible: true,
+      ruta: '/(home)/vacunas',
+    },
   ];
 
   return (
