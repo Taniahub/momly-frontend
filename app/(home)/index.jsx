@@ -63,7 +63,8 @@ export default function HomeScreen() {
       emoji: '🗓️',
       titulo: 'Citas y Recordatorios',
       descripcion: 'Gestiona tus citas médicas',
-      disponible: false,
+      disponible: true,
+      ruta: '/(home)/citas',
     },
     {
       emoji: '❓',

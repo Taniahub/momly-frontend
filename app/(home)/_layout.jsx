@@ -6,6 +6,7 @@ export default function HomeLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="guias" />
       <Stack.Screen name="bienestar" />
+      <Stack.Screen name="citas" />
     </Stack>
   );
 }
