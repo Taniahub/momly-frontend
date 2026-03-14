@@ -48,15 +48,25 @@ export default function LoginScreen() {
     await AsyncStorage.setItem('token', token);
     await AsyncStorage.setItem('usuario', JSON.stringify(usuario));
 
-    const bebeResponse = await api.get(`/auth/bebe/${usuario.id}`);
-    if (bebeResponse.data.ok) {
-      const bebe = bebeResponse.data.data;
-      await AsyncStorage.setItem('bebe', JSON.stringify({ id: bebe.id_bebe, nombre: bebe.nombre }));
+    // Bebé en try/catch separado para no bloquear el login
+    try {
+      const bebeResponse = await api.get(`/auth/bebe/${usuario.id}`);
+      if (bebeResponse.data.ok) {
+        const bebe = bebeResponse.data.data;
+        await AsyncStorage.setItem('bebe', JSON.stringify({ id: bebe.id_bebe, nombre: bebe.nombre }));
+      }
+    } catch (bebeError) {
+      console.warn('No se pudo cargar el bebé:', bebeError.message);
     }
+
     router.replace('/(home)');
   } catch (error) {
     const mensaje = error.response?.data?.mensaje || 'Error al iniciar sesión';
-    Alert.alert('Error', mensaje);
+    if (Platform.OS === 'web') {
+      window.alert(mensaje);
+    } else {
+      Alert.alert('Error', mensaje);
+    }
   } finally {
     setLoading(false);
   }
