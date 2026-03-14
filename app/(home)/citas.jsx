@@ -351,9 +351,17 @@ export default function CitasScreen() {
 
       </ScrollView>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>🌸 MOMLY — contigo en cada primer paso</Text>
-      </View>
+        <View style={styles.footerColumnas}>
+            <View style={styles.columnaIzquierda}>
+                <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+                <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+            </View>
+                                
+            <View style={styles.columnaDerecha}>
+                <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+                <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+            </View>
+        </View>
     </View>
   );
 }
@@ -475,7 +483,21 @@ const styles = StyleSheet.create({
   vacioTitulo: { fontSize: 18, fontWeight: 'bold', color: colors.textDark, marginBottom: 8 },
   vacioDesc: { fontSize: 13, color: colors.textMedium, textAlign: 'center', lineHeight: 20 },
 
-  footer: { backgroundColor: colors.primary, paddingVertical: 16, alignItems: 'center' },
-  footerText: { color: colors.white, fontSize: 13, fontStyle: 'italic' },
+  // Footer
+  footerColumnas: {
+    backgroundColor: '#FADBD8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(0,0,0,0.05)',
+  },
+  columnaIzquierda: { flex: 1 },
+  columnaDerecha: { flex: 1, alignItems: 'flex-end' },
+  footerTextMin: { color: '#5D6D7E', fontSize: 20, fontWeight: 'bold' },
+  footerSloganMin: { color: '#04080c', fontSize: 15, opacity: 0.8 },
+  footerLegalMin: { color: '#04080c', fontSize: 15, opacity: 0.7, textAlign: 'right' },
 });
 
