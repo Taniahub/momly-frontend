@@ -411,8 +411,8 @@ slogan: {
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
-  bannerTitle: { fontSize: 32, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
-  bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 4, fontStyle: 'italic' },
+  bannerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
+  bannerSlogan: { fontSize: 12, color: colors.white, marginTop: 2 },
   backPlaceholder: { width: 80 },
 
   pasoContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 10, paddingHorizontal: 40 },
