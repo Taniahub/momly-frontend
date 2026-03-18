@@ -388,26 +388,11 @@ slogan: {
 
   // Banner
   banner: {
-    backgroundColor: '#5e5d5d',
+    backgroundColor: colors.primary,
     paddingVertical: 5,
     alignItems: 'center',
   },
-  bannerTitle: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#5e5d5d' ,
-    letterSpacing: 4,
-  },
-  bannerSlogan: {
-    fontSize: 25,
-    color: '#5e5d5d' ,
-    marginTop: 5,
-    fontStyle: 'Montserrat-SemiBold',
-  fontWeight: '600',
-  textAlign: 'center',
-  letterSpacing: -0.5,
-
-  },
+  
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
