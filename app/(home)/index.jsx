@@ -86,6 +86,13 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/vacunas',
     },
+    {
+      emoji: '📚',
+      titulo: 'Biblioteca del bebé',
+      descripcion: 'Lactancia, sueño, alimentación y más',
+      disponible: true,
+      ruta: '/(home)/biblioteca',
+    },
   ];
 
   return (

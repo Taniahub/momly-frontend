@@ -388,7 +388,7 @@ slogan: {
 
   // Banner
   banner: {
-    backgroundColor: colors.primary,
+    backgroundColor: '#5e5d5d',
     paddingVertical: 5,
     alignItems: 'center',
   },
@@ -411,8 +411,8 @@ slogan: {
   backBtn: { width: 80 },
   backText: { color: colors.white, fontSize: 14, fontWeight: '600' },
   bannerCenter: { alignItems: 'center', flex: 1 },
-  bannerTitle: { fontSize: 32, fontWeight: 'bold', color: colors.white, letterSpacing: 4 },
-  bannerSlogan: { fontSize: 12, color: colors.white, marginTop: 4, fontStyle: 'italic' },
+  bannerTitle: { fontSize: 32, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
+  bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 4, fontStyle: 'italic' },
   backPlaceholder: { width: 80 },
 
   pasoContainer: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: 10, paddingHorizontal: 40 },
@@ -467,7 +467,7 @@ slogan: {
     justifyContent: 'space-between', 
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 8,         // Espacio mínimo vertical
+    paddingVertical: 8,         
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.05)',
   },
@@ -476,10 +476,10 @@ slogan: {
   },
   columnaDerecha: {
     flex: 1,
-    alignItems: 'flex-end',    // Alinea el texto legal a la derecha
+    alignItems: 'flex-end',    
   },
   footerTextMin: {
-    color: '#5D6D7E',          // Gris marca
+    color: '#5D6D7E',          
     fontSize: 20,
     fontWeight: 'bold',
   },
