@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 const PLANES = [
   {
@@ -60,7 +60,7 @@ export default function PremiumScreen() {
       if (usuarioData) {
         const u = JSON.parse(usuarioData);
         setUsuario(u);
-        const response = await axios.get(`http://localhost:3000/api/auth/suscripcion/${u.id}`);
+        const response = await api.get(`/auth/suscripcion/${u.id}`);
         if (response.data.ok) {
           setSuscripcion(response.data.data);
         }
@@ -79,7 +79,7 @@ export default function PremiumScreen() {
     }
     setLoadingActivar(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/suscripcion', {
+      const response = await api.post('/auth/suscripcion', {
         id_usuario: usuario.id,
         meses: planSeleccionado,
       });
@@ -221,9 +221,16 @@ export default function PremiumScreen() {
 
       </ScrollView>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>🌸 MOMLY — contigo en cada primer paso</Text>
-      </View>
+      <View style={styles.footerColumnas}>
+              <View style={styles.columnaIzquierda}>
+                  <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+                  <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+              </View>
+              <View style={styles.columnaDerecha}>
+                  <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+                  <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+              </View>
+              </View>
     </View>
   );
 }

@@ -12,6 +12,7 @@ export default function HomeLayout() {
       <Stack.Screen name="acompanamiento" />
       <Stack.Screen name="sugerencias" />
       <Stack.Screen name="premium" />
+      <Stack.Screen name="comunidad" />
     </Stack>
   );
 }

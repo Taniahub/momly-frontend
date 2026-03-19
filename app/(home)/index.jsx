@@ -115,6 +115,13 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/premium',
     },
+    {
+      emoji: '👥',
+      titulo: 'Comunidad',
+      descripcion: 'Comparte y conecta con otras mamas',
+      disponible: true,
+      ruta: '/(home)/comunidad',
+    },
 
   ];
 
