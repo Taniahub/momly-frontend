@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 const GRUPOS_EDAD = [
   { label: 'Recién nacido', min: 0, max: 0 },
@@ -45,7 +45,7 @@ export default function VacunasScreen() {
 
   const cargarVacunas = async (id_bebe) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/vacunas/${id_bebe}`);
+      const response = await api.get(`/auth/vacunas/${id_bebe}`);
       setVacunas(response.data.data);
     } catch (error) {
       console.error('Error cargando vacunas:', error);
@@ -59,7 +59,7 @@ export default function VacunasScreen() {
         if (!confirmar) return;
       }
       try {
-        await axios.delete(`http://localhost:3000/api/auth/vacunas/${vacuna.id_vacuna_bebe}`);
+        await api.delete(`/auth/vacunas/${vacuna.id_vacuna_bebe}`);
         cargarVacunas(bebe.id);
       } catch (error) {
         console.error('Error desmarcando vacuna:', error);
@@ -67,7 +67,7 @@ export default function VacunasScreen() {
     } else {
       try {
         const hoy = new Date().toISOString().slice(0, 10);
-        await axios.post('http://localhost:3000/api/auth/vacunas', {
+        await api.post('/auth/vacunas', {
           id_bebe: bebe.id,
           id_vacuna: vacuna.id_vacuna,
           fecha_aplicacion: hoy,
