@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 const ESTADOS = [
   { key: 'muy_bien', emoji: '🤩', label: 'Muy bien' },
@@ -36,7 +36,7 @@ export default function AcompanamientoScreen() {
       const usuarioData = await AsyncStorage.getItem('usuario');
       if (usuarioData) {
         const usuario = JSON.parse(usuarioData);
-        const response = await axios.get(`http://localhost:3000/api/auth/bienestar/${usuario.id}`);
+        const response = await api.get(`/auth/bienestar/${usuario.id}`);
         if (response.data.data.length > 0) {
           setUltimoEstado(response.data.data[0].estado_emocional);
         }
@@ -50,7 +50,7 @@ export default function AcompanamientoScreen() {
     setEstadoSeleccionado(estado);
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/acompanamiento/${estado}`);
+      const response = await api.get(`/auth/acompanamiento/${estado}`);
       setAcompanamiento(response.data.data);
     } catch (error) {
       console.error('Error cargando acompañamiento:', error);
