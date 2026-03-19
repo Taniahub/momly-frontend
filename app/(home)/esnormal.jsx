@@ -4,8 +4,8 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 export default function EsNormalScreen() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function EsNormalScreen() {
 
   const cargarPreguntas = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/es-normal');
+      const response = await api.get('/auth/es-normal');
       setPreguntas(response.data.data);
     } catch (error) {
       console.error('Error cargando preguntas:', error);
@@ -33,10 +33,12 @@ export default function EsNormalScreen() {
   const categorias = ['Todas', ...new Set(preguntas.map(p => p.categoria))];
 
   const preguntasFiltradas = preguntas.filter(p => {
-    const coincideCategoria = categoriaActiva === 'Todas' || p.categoria === categoriaActiva;
-    const coincideBusqueda = p.pregunta.toLowerCase().includes(busqueda.toLowerCase());
-    return coincideCategoria && coincideBusqueda;
-  });
+  const coincideCategoria = categoriaActiva === 'Todas' || p.categoria === categoriaActiva;
+  const coincideBusqueda = p.pregunta.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .includes(busqueda.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+  return coincideCategoria && coincideBusqueda;
+});
 
   if (loading) {
     return (
@@ -55,7 +57,7 @@ export default function EsNormalScreen() {
             <Text style={styles.backText}>← Volver</Text>
           </TouchableOpacity>
           <View style={styles.bannerCenter}>
-            <Text style={styles.bannerTitle}>M🌸MLY</Text>
+            <Text style={styles.bannerTitle}>MOMLY</Text>
             <Text style={styles.bannerSlogan}>¿Es Normal?</Text>
           </View>
           <View style={styles.backPlaceholder} />
