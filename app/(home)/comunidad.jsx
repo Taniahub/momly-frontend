@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 export default function ComunidadScreen() {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function ComunidadScreen() {
 
   const cargarPublicaciones = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/publicaciones');
+      const response = await api.get('/auth/publicaciones');
       setPublicaciones(response.data.data);
     } catch (error) {
       console.error('Error cargando publicaciones:', error);
@@ -51,7 +51,7 @@ export default function ComunidadScreen() {
 
   const cargarComentarios = async (id_publicacion) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/comentarios/${id_publicacion}`);
+      const response = await api.get(`/auth/comentarios/${id_publicacion}`);
       setComentarios(response.data.data);
     } catch (error) {
       console.error('Error cargando comentarios:', error);
@@ -62,7 +62,7 @@ export default function ComunidadScreen() {
     if (!contenido.trim()) return;
     setLoadingPublicar(true);
     try {
-      await axios.post('http://localhost:3000/api/auth/publicaciones', {
+      await api.post('/auth/publicaciones', {
         id_usuario: usuario.id,
         contenido,
         anonimo: anonimo ? 1 : 0,
@@ -84,7 +84,7 @@ export default function ComunidadScreen() {
       if (!confirmar) return;
     }
     try {
-      await axios.delete(`http://localhost:3000/api/auth/publicaciones/${id_publicacion}`);
+      await api.delete(`/auth/publicaciones/${id_publicacion}`);
       cargarPublicaciones();
     } catch (error) {
       console.error('Error eliminando publicacion:', error);
@@ -100,7 +100,7 @@ export default function ComunidadScreen() {
     if (!nuevoComentario.trim()) return;
     setLoadingComentario(true);
     try {
-      await axios.post('http://localhost:3000/api/auth/comentarios', {
+      await api.post('/auth/comentarios', {
         id_publicacion: publicacionActiva.id_publicacion,
         id_usuario: usuario.id,
         comentario: nuevoComentario,
@@ -227,7 +227,7 @@ export default function ComunidadScreen() {
           <Text style={styles.backText}>← Volver</Text>
         </TouchableOpacity>
         <View style={styles.bannerCenter}>
-          <Text style={styles.bannerTitle}>M🌸MLY</Text>
+          <Text style={styles.bannerTitle}>MOMLY</Text>
           <Text style={styles.bannerSlogan}>Comunidad</Text>
         </View>
         <View style={styles.backPlaceholder} />

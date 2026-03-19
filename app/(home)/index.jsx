@@ -122,6 +122,13 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/comunidad',
     },
+    {
+      emoji: '👩‍⚕️',
+      titulo: 'Especialistas',
+      descripcion: 'Acceso prioritario para usuarias Premium',
+      disponible: true,
+      ruta: '/(home)/especialistas',
+    },
 
   ];
 
