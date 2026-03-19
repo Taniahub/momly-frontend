@@ -108,6 +108,13 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/sugerencias',
     },
+    {
+      emoji: '⭐',
+      titulo: 'Plan Premium',
+      descripcion: 'Accede a contenido y funciones exclusivas',
+      disponible: true,
+      ruta: '/(home)/premium',
+    },
 
   ];
 

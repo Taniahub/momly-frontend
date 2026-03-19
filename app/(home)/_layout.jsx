@@ -11,6 +11,7 @@ export default function HomeLayout() {
       <Stack.Screen name="esnormal" />
       <Stack.Screen name="acompanamiento" />
       <Stack.Screen name="sugerencias" />
+      <Stack.Screen name="premium" />
     </Stack>
   );
 }
