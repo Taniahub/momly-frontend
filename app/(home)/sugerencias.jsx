@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 const ICONOS_AREA = {
   'Estimulacion visual': '👁️',
@@ -47,7 +47,7 @@ export default function SugerenciasScreen() {
 
         // Obtener fecha de nacimiento del bebé
         const usuario = JSON.parse(usuarioData);
-        const bebeResponse = await axios.get(`http://localhost:3000/api/auth/bebe/${usuario.id}`);
+        const bebeResponse = await api.get(`/auth/bebe/${usuario.id}`);
         if (bebeResponse.data.ok) {
           const fechaNac = new Date(bebeResponse.data.data.fecha_nacimiento);
           const hoy = new Date();
@@ -65,7 +65,7 @@ export default function SugerenciasScreen() {
 
   const cargarSugerencias = async (mesesEdad) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/sugerencias/${mesesEdad}`);
+      const response = await api.get(`/auth/sugerencias/${mesesEdad}`);
       setSugerencias(response.data.data);
     } catch (error) {
       console.error('Error cargando sugerencias:', error);
