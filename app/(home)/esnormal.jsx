@@ -101,7 +101,7 @@ export default function EsNormalScreen() {
           <Text style={styles.backText}>← Volver</Text>
         </TouchableOpacity>
         <View style={styles.bannerCenter}>
-          <Text style={styles.bannerTitle}>M🌸MLY</Text>
+          <Text style={styles.bannerTitle}>MOMLY</Text>
           <Text style={styles.bannerSlogan}>¿Es Normal?</Text>
         </View>
         <View style={styles.backPlaceholder} />

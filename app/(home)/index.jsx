@@ -94,6 +94,13 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/biblioteca',
     },
+    {
+      emoji: '💆',
+      titulo: 'Acompañamiento Emocional',
+      descripcion: 'Recomendaciones y estrategias personalizadas',
+      disponible: true,
+      ruta: '/(home)/acompanamiento',
+    },
   ];
 
   return (
