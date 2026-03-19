@@ -70,7 +70,8 @@ export default function HomeScreen() {
       emoji: '❓',
       titulo: '¿Es Normal?',
       descripcion: 'Consulta situaciones comunes',
-      disponible: false,
+      disponible: true,
+      ruta: '/(home)/esnormal',
     },
     {
       emoji: '💆',

@@ -447,8 +447,8 @@ slogan: {
   loginLink: { fontSize: 14, color: colors.primary, fontWeight: 'bold' },
   // Footer estilo "App Pro"
   footerColumnas: {
-    backgroundColor: '#FADBD8', // Rosa suave MOMLY
-    flexDirection: 'row',       // Esto crea las dos columnas
+    backgroundColor: '#FADBD8', 
+    flexDirection: 'row',     
     justifyContent: 'space-between', 
     alignItems: 'center',
     paddingHorizontal: 20,

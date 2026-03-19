@@ -8,6 +8,7 @@ export default function HomeLayout() {
       <Stack.Screen name="bienestar" />
       <Stack.Screen name="citas" />
       <Stack.Screen name="biblioteca" />
+      <Stack.Screen name="esnormal" />
     </Stack>
   );
 }
