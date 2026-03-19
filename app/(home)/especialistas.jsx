@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 const ICONOS_ESPECIALIDAD = {
   'Pediatra': '👶',
@@ -39,8 +39,8 @@ export default function EspecialistasScreen() {
         const u = JSON.parse(usuarioData);
         setUsuario(u);
         const [espResponse, consResponse] = await Promise.all([
-          axios.get('http://localhost:3000/api/auth/especialistas'),
-          axios.get(`http://localhost:3000/api/auth/consultas/${u.id}`),
+          api.get('/auth/especialistas'),
+          api.get(`/auth/consultas/${u.id}`),
         ]);
         setEspecialistas(espResponse.data.data);
         setMisConsultas(consResponse.data.data);
@@ -128,7 +128,7 @@ export default function EspecialistasScreen() {
       const [dia, mes, anio] = fecha.split('/');
       const hora24 = convertirA24h(hora, ampm);
       const fechaHora = `${anio}-${mes}-${dia}T${hora24}:00`;
-      await axios.post('http://localhost:3000/api/auth/consultas', {
+      await api.post('/auth/consultas', {
         id_usuario: usuario.id,
         id_especialista: especialistaActivo.id_especialista,
         fecha: fechaHora,
