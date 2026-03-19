@@ -101,6 +101,14 @@ export default function HomeScreen() {
       disponible: true,
       ruta: '/(home)/acompanamiento',
     },
+    {
+      emoji: '🌱',
+      titulo: 'Desarrollo del Bebé',
+      descripcion: 'Sugerencias según la etapa de tu bebé',
+      disponible: true,
+      ruta: '/(home)/sugerencias',
+    },
+
   ];
 
   return (
