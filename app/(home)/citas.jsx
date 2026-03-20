@@ -99,33 +99,44 @@ export default function CitasScreen() {
   };
 
   const handleGuardar = async () => {
-    if (!validar()) return;
-    setLoading(true);
-    try {
-      const [dia, mes, anio] = fecha.split('/');
-      const hora24 = convertirA24h(hora, ampm);
-      const fecha_hora = `${anio}-${mes}-${dia}T${hora24}:00`;
-      await api.post('/auth/citas', {
-        id_usuario: usuario.id,
-        titulo,
-        descripcion,
-        fecha_hora,
-        recordatorio: recordatorio ? 1 : 0,
-      });
-      setTitulo('');
-      setDescripcion('');
-      setFecha('');
-      setHora('');
-      setAmpm('AM');
-      setRecordatorio(false);
-      setMostrarFormulario(false);
-      cargarCitas(usuario.id);
-    } catch (error) {
-      console.error('Error guardando cita:', error);
-    } finally {
-      setLoading(false);
+  if (!validar()) return;
+
+  if (Platform.OS === 'web') {
+    window.alert(`Guardando cita: ${titulo} - ${fecha} ${hora} ${ampm}`);
+  }
+
+  setLoading(true);
+  try {
+    const [dia, mes, anio] = fecha.split('/');
+    const hora24 = convertirA24h(hora, ampm);
+    const fecha_hora = `${anio}-${mes}-${dia}T${hora24}:00`;
+
+    console.log('Enviando:', { id_usuario: usuario?.id, titulo, fecha_hora });
+
+    await api.post('/auth/citas', {
+      id_usuario: usuario.id,
+      titulo,
+      descripcion,
+      fecha_hora,
+      recordatorio: recordatorio ? 1 : 0,
+    });
+    setTitulo('');
+    setDescripcion('');
+    setFecha('');
+    setHora('');
+    setAmpm('AM');
+    setRecordatorio(false);
+    setMostrarFormulario(false);
+    cargarCitas(usuario.id);
+  } catch (error) {
+    console.error('Error guardando cita:', error);
+    if (Platform.OS === 'web') {
+      window.alert('Error: ' + (error.response?.data?.mensaje || error.message));
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleEliminar = async (id_cita) => {
     if (Platform.OS === 'web') {
