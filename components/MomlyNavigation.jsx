@@ -41,7 +41,7 @@ const COLORS = {
 
 const BREAKPOINT = 768; // px — desktop vs mobile
 
-/** All nav sections pulled from the dashboard screenshot */
+/** Keys coinciden exactamente con los nombres de archivo en app/(home)/ */
 export const NAV_ITEMS = [
   { key: 'index',           label: 'Inicio',                    icon: '🏠' },
   { key: 'guias',           label: 'Guías de Recuperación',     icon: '📚', sub: 'Física y emocional' },
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
 
   // Desktop header
   desktopHeader: {
-    backgroundColor: COLORS.white,
+    backgroundColor: "#FFF1E6",
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
     zIndex: 100,
@@ -523,7 +523,7 @@ const styles = StyleSheet.create({
 
   // Mobile header bar
   mobileHeader: {
-    backgroundColor: COLORS.white,
+    backgroundColor: "#FFF1E6",
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
     flexDirection: 'row',
