@@ -51,7 +51,7 @@ export default function HomeScreen() {
       <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
         {/* El nombre viene del backend: puede ser "nombre" o "name" según tu API */}
         <Text style={styles.greeting}>
-          ¡Hola, {user?.nombre ?? user?.name ?? 'mamá'}! 👋
+          ¡Hola, {user?.nombre ?? user?.nombre ?? 'mamá'}! 👋
         </Text>
         <Text style={styles.greetingSub}>Bienvenida a MOMLY 🌸</Text>
         <Text style={styles.sectionTitle}>¿Qué quieres hacer hoy?</Text>
