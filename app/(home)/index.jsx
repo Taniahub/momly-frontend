@@ -25,8 +25,8 @@ function MetricCard({ icon, value, label, badge, badgeType }) {
   const badgeStyle = {
     warn: { bg: '#fff8e6', text: '#b8860b' },
     ok:   { bg: '#e6f9ef', text: '#1a7a4a' },
-    info: { bg: '#fff0f5', text: '#E8336D' },
-  }[badgeType] || { bg: '#fff0f5', text: '#E8336D' };
+    info: { bg: '#fff0f5', text: '#F7C6D0 ' },
+  }[badgeType] || { bg: '#fff0f5', text: '#F7C6D0 ' };
 
   return (
     <View style={styles.metric}>
@@ -255,13 +255,13 @@ const styles = StyleSheet.create({
   // Saludo
   greetingRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16, flexWrap: 'wrap', gap: 8 },
   greeting:    { fontSize: 22, fontWeight: '800', color: '#2d2d2d' },
-  greetingSub: { fontSize: 13, color: '#E8336D', fontWeight: '600', marginTop: 2 },
+  greetingSub: { fontSize: 13, color: '#F7C6D0 ', fontWeight: '600', marginTop: 2 },
   fecha:       { fontSize: 12, color: '#aaa', fontWeight: '600' },
 
   // Alerta
   alertBanner: {
     backgroundColor: '#fff0f5', borderWidth: 1, borderColor: '#fde8ee',
-    borderLeftWidth: 4, borderLeftColor: '#E8336D',
+    borderLeftWidth: 4, borderLeftColor: '#F7C6D0 ',
     borderRadius: 12, padding: 14,
     flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 16,
   },
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     borderRadius: 14, padding: 14,
     flexDirection: 'row', alignItems: 'center', gap: 10,
   },
-  ctaBtnPrimary: { backgroundColor: '#E8336D', borderColor: '#E8336D' },
+  ctaBtnPrimary: { backgroundColor: '#F7C6D0 ', borderColor: '#F7C6D0 ' },
   ctaIcon:       { width: 38, height: 38, borderRadius: 10, backgroundColor: '#fff0f5', alignItems: 'center', justifyContent: 'center' },
   ctaIconPrimary:{ backgroundColor: 'rgba(255,255,255,0.2)' },
   ctaLabel:      { fontSize: 12, fontWeight: '800', color: '#2d2d2d' },
@@ -316,5 +316,5 @@ const styles = StyleSheet.create({
   recentIcon:  { width: 36, height: 36, borderRadius: 10, backgroundColor: '#fff0f5', alignItems: 'center', justifyContent: 'center' },
   recentLabel: { fontSize: 13, fontWeight: '700', color: '#2d2d2d' },
   recentSub:   { fontSize: 11, color: '#aaa', marginTop: 1 },
-  recentArrow: { marginLeft: 'auto', color: '#E8336D', fontSize: 14, fontWeight: '700' },
+  recentArrow: { marginLeft: 'auto', color: '#F7C6D0 ', fontSize: 14, fontWeight: '700' },
 });
