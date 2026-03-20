@@ -82,6 +82,17 @@ export default function HomeScreen() {
           })}
         </View>
       </ScrollView>
+      {/* Footer */}
+            <View style={styles.footerColumnas}>
+              <View style={styles.columnaIzquierda}>
+                <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+                <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+              </View>
+              <View style={styles.columnaDerecha}>
+                <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+                <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+              </View>
+            </View>
     </View>
   );
 }
@@ -117,4 +128,20 @@ const styles = StyleSheet.create({
   cardSub:        { fontSize: 11, color: '#9b9b9b', textAlign: 'center' },
   premiumTag:     { backgroundColor: '#fff8e6', borderRadius: 10, paddingHorizontal: 8, paddingVertical: 2, marginTop: 4 },
   premiumTagText: { fontSize: 10, fontWeight: '700', color: '#b8860b' },
+// Footer
+  footerColumnas: {
+    backgroundColor: '#FADBD8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(0,0,0,0.05)',
+  },
+  columnaIzquierda: { flex: 1 },
+  columnaDerecha: { flex: 1, alignItems: 'flex-end' },
+  footerTextMin: { color: '#5D6D7E', fontSize: 20, fontWeight: 'bold' },
+  footerSloganMin: { color: '#04080c', fontSize: 15, opacity: 0.8 },
+  footerLegalMin: { color: '#04080c', fontSize: 15, opacity: 0.7, textAlign: 'right' },
 });
