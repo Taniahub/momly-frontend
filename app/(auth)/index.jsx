@@ -6,14 +6,26 @@ import {
   ScrollView,
   Dimensions,
   Image,
+  Animated,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { colors } from '../../constants/colors';
+import { useState, useRef } from 'react';
 
 const { width, height } = Dimensions.get('window');
 
+const SERVICIOS = [
+  'Acompañamiento posparto',
+  'Monitoreo del bienestar emocional',
+  'Gestión del cuidado integral del bebé',
+  'Administración de agenda y recordatorios',
+  'Monitoreo de cansancio y fatiga',
+  'Gestión de comunidad',
+];
+
 export default function LandingScreen() {
   const router = useRouter();
+  const [verMasAbierto, setVerMasAbierto] = useState(false);
 
   return (
     <ScrollView
@@ -23,8 +35,8 @@ export default function LandingScreen() {
     >
       {/* Header */}
       <View style={styles.header}>
-        <Image 
-          source={require('../../assets/images/logo.png')} // Asegúrate de poner el nombre real de tu archivo
+        <Image
+          source={require('../../assets/images/logo.png')}
           style={styles.logoImagen}
           resizeMode="contain"
         />
@@ -46,18 +58,37 @@ export default function LandingScreen() {
           en cada momento.
         </Text>
 
-        <TouchableOpacity style={styles.verMasBtn}>
-          <Text style={styles.verMasText}>Ver Más</Text>
+        {/* Botón Ver Más / Ver Menos */}
+        <TouchableOpacity
+          style={styles.verMasBtn}
+          onPress={() => setVerMasAbierto(!verMasAbierto)}
+          activeOpacity={0.75}
+        >
+          <Text style={styles.verMasText}>
+            {verMasAbierto ? 'Ver Menos ▲' : 'Ver Más ▼'}
+          </Text>
         </TouchableOpacity>
+
+        {/* Lista desplegable */}
+        {verMasAbierto && (
+          <View style={styles.desplegableContainer}>
+            <Text style={styles.ofrecemosTitle}>¿Qué ofrece MOMLY?</Text>
+            {SERVICIOS.map((item, index) => (
+              <View key={index} style={styles.ofrecemosItem}>
+                <Text style={styles.ofrecemosItemText}>🌸 {item}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
 
       {/* Imagen ilustracion */}
       <View style={styles.ilustracionContainer}>
         <View style={styles.ilustracionCircle}>
-          <Image 
-            source={require('../../assets/images/Uno.png')} 
-            style={styles.imagenRedonda} 
-            resizeMode="cover" // Importante para que llene el círculo
+          <Image
+            source={require('../../assets/images/Uno.png')}
+            style={styles.imagenRedonda}
+            resizeMode="cover"
           />
         </View>
       </View>
@@ -69,17 +100,10 @@ export default function LandingScreen() {
         </Text>
       </View>
 
-      {/* Que ofrece */}
+      {/* Que ofrece (sección completa debajo) */}
       <View style={styles.ofrecemosContainer}>
         <Text style={styles.ofrecemosTitle}>¿Qué ofrece MOMLY?</Text>
-        {[
-          'Acompañamiento posparto',
-          'Monitoreo del bienestar emocional',
-          'Gestión del cuidado integral del bebé',
-          'Administración de agenda y recordatorios',
-          'Monitoreo de cansancio y fatiga',
-          'Gestión de comunidad',
-        ].map((item, index) => (
+        {SERVICIOS.map((item, index) => (
           <View key={index} style={styles.ofrecemosItem}>
             <Text style={styles.ofrecemosItemText}>{item}</Text>
           </View>
@@ -114,19 +138,18 @@ export default function LandingScreen() {
         </TouchableOpacity>
       </View>
 
-        {/* Footer */}
-        {/* Footer ultra compacto en dos columnas */}
-              <View style={styles.footerColumnas}>
-                <View style={styles.columnaIzquierda}>
-                  <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
-                  <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
-                </View>
-                
-                <View style={styles.columnaDerecha}>
-                  <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
-                  <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
-                </View>
-              </View>
+      {/* Footer */}
+      <View style={styles.footerColumnas}>
+        <View style={styles.columnaIzquierda}>
+          <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+          <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+        </View>
+
+        <View style={styles.columnaDerecha}>
+          <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+          <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -140,25 +163,25 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
 
-  // Header nav
+  // Header
   header: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  paddingHorizontal: 20,
-  paddingTop: 50,
-  paddingBottom: 10,
-  backgroundColor: '#FFF1E6', // Rosa de fondo del header
-},
-logoImagen: {
-  width: 100,  // Ajusta según el ancho de tu nueva imagen
-  height: 40,  // Ajusta según el alto de tu nueva imagen
-},
-slogan: {
-  fontSize: 11,
-  color: colors.textMedium,
-  fontFamily: 'Montserrat', // Corregido de fontStyle a fontFamily
-},
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 50,
+    paddingBottom: 10,
+    backgroundColor: '#FFF1E6',
+  },
+  logoImagen: {
+    width: 100,
+    height: 40,
+  },
+  slogan: {
+    fontSize: 11,
+    color: colors.textMedium,
+    fontFamily: 'Montserrat',
+  },
 
   // Banner
   banner: {
@@ -169,18 +192,16 @@ slogan: {
   bannerTitle: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#5e5d5d' ,
+    color: '#5e5d5d',
     letterSpacing: 4,
   },
   bannerSlogan: {
     fontSize: 25,
-    color: '#5e5d5d' ,
+    color: '#5e5d5d',
     marginTop: 5,
-    fontStyle: 'Montserrat-SemiBold',
-  fontWeight: '600',
-  textAlign: 'center',
-  letterSpacing: -0.5,
-
+    fontWeight: '600',
+    textAlign: 'center',
+    letterSpacing: -0.5,
   },
 
   // Descripcion
@@ -199,21 +220,33 @@ slogan: {
     fontWeight: 'bold',
     color: '#8E8E8E',
   },
+
+  // Botón Ver Más
   verMasBtn: {
     marginTop: 16,
-    backgroundColor: '#FADBD8', 
-    borderRadius: 12,            
+    backgroundColor: '#FADBD8',
+    borderRadius: 12,
     paddingHorizontal: 24,
-    paddingVertical: 10,        
-    alignSelf: 'center',        
+    paddingVertical: 10,
+    alignSelf: 'center',
   },
-  
   verMasText: {
-    color: '#5D6D7E',           
+    color: '#5D6D7E',
     fontSize: 13,
-    fontFamily: 'Montserrat',   
-    fontWeight: '600',          
+    fontFamily: 'Montserrat',
+    fontWeight: '600',
     textAlign: 'center',
+  },
+
+  // Desplegable dentro de descripción
+  desplegableContainer: {
+    marginTop: 20,
+    width: '100%',
+    backgroundColor: '#FFF6F4',
+    borderRadius: 14,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#F5C6CE',
   },
 
   // Ilustracion
@@ -223,59 +256,51 @@ slogan: {
     backgroundColor: colors.primaryPale,
   },
   ilustracionCircle: {
-    width: 250,          // Aumentado de 140
-    height: 250,         // Aumentado de 140
-    borderRadius: 150,   // Mitad de 200 para que siga siendo redondo
+    width: 250,
+    height: 250,
+    borderRadius: 150,
     backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
-    overflow: 'hidden',  // Mantiene el recorte de las esquinas negras
-    
-    // Sombras
+    overflow: 'hidden',
     shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 10,
     elevation: 5,
   },
-
   imagenRedonda: {
-    width: '100%', 
+    width: '100%',
     height: '100%',
-    // No hace falta poner borderRadius aquí si el padre tiene overflow: 'hidden'
-  },
-  ilustracionEmoji: {
-    fontSize: 70,
   },
 
   // Frase
   fraseContainer: {
-    backgroundColor: '#EBADB2', // Rosa fuerte de la burbuja
+    backgroundColor: '#EBADB2',
     paddingHorizontal: 25,
     paddingVertical: 20,
-    borderRadius: 40,           // Bordes muy redondeados
+    borderRadius: 40,
     marginTop: 25,
     alignSelf: 'center',
-    maxWidth: '80%',            // Para que mantenga la forma de burbuja
+    maxWidth: '80%',
   },
-  
   frase: {
-    // Si puedes instalar Quicksand, úsala. Si no, usa 'system' con estos ajustes:
-    fontFamily: 'Quicksand-Bold', 
-    fontSize: 22,               // Un poco más grande para que destaque
-    color: '#553830',           // El café oscuro de la imagen
+    fontFamily: 'Quicksand-Bold',
+    fontSize: 22,
+    color: '#553830',
     textAlign: 'center',
-    lineHeight: 25,             // Espacio entre líneas apretado como en la imagen
-    letterSpacing: 0.5,         // Letras ligeramente separadas
+    lineHeight: 25,
+    letterSpacing: 0.5,
   },
 
-  // Que ofrece
+  // Que ofrece (sección completa)
   ofrecemosContainer: {
     backgroundColor: colors.white,
     marginHorizontal: 24,
     borderRadius: 16,
     padding: 20,
     marginBottom: 20,
+    marginTop: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06,
@@ -333,44 +358,41 @@ slogan: {
     marginBottom: 30,
   },
   btnIniciarSesion: {
-  backgroundColor: '#F7C6D0',
-  borderRadius: 25,
-  paddingVertical: 14,
-  alignItems: 'center',
-  shadowColor: colors.primary,
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.25,
-  shadowRadius: 6,
-  elevation: 4,
-},
+    backgroundColor: '#F7C6D0',
+    borderRadius: 25,
+    paddingVertical: 14,
+    alignItems: 'center',
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  btnIniciarSesionText: {
+    color: colors.textDark,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  btnRegistrarse: {
+    backgroundColor: colors.primarySoft,
+    borderRadius: 25,
+    paddingVertical: 14,
+    alignItems: 'center',
+  },
+  btnRegistrarseText: {
+    color: colors.textDark,
+    fontSize: 16,
+    fontWeight: '600',
+  },
 
-btnIniciarSesionText: {
-  color: colors.textDark,
-  fontSize: 16,
-  fontWeight: '600',
-},
-
-btnRegistrarse: {
-  backgroundColor: colors.primarySoft,
-  borderRadius: 25,
-  paddingVertical: 14,
-  alignItems: 'center',
-},
-
-btnRegistrarseText: {
-  color: colors.textDark,
-  fontSize: 16,
-  fontWeight: '600',
-},
-
-  // Footer estilo "App Pro"
+  // Footer
   footerColumnas: {
-    backgroundColor: '#FADBD8', // Rosa suave MOMLY
-    flexDirection: 'row',       // Esto crea las dos columnas
-    justifyContent: 'space-between', 
+    backgroundColor: '#FADBD8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 8,         // Espacio mínimo vertical
+    paddingVertical: 8,
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.05)',
   },
@@ -379,10 +401,10 @@ btnRegistrarseText: {
   },
   columnaDerecha: {
     flex: 1,
-    alignItems: 'flex-end',    // Alinea el texto legal a la derecha
+    alignItems: 'flex-end',
   },
   footerTextMin: {
-    color: '#5D6D7E',          // Gris marca
+    color: '#5D6D7E',
     fontSize: 20,
     fontWeight: 'bold',
   },

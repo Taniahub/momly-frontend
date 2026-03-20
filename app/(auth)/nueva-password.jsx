@@ -65,7 +65,8 @@ export default function NuevaPasswordScreen() {
       await authService.restablecerPassword({ correo, codigo, nuevaPassword: password });
       if (Platform.OS === 'web') {
         window.alert('¡Contraseña actualizada con éxito! Ya puedes iniciar sesión.');
-      } else {
+        router.replace('/(auth)/login');  // 👈 agrega esta línea
+        } else {
         Alert.alert(
           '✅ ¡Listo!',
           'Tu contraseña fue actualizada. Inicia sesión con tu nueva contraseña.',
