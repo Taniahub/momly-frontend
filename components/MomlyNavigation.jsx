@@ -59,17 +59,12 @@ function useScreenWidth() {
 }
 
 function MomlyLogo({ size = 'md' }) {
-  const fontSize = size === 'sm' ? 17 : 20;
-  const tagSize  = size === 'sm' ? 7.5 : 8.5;
   return (
-    <View>
-      <Text style={[styles.logoName, { fontSize }]}>
-        M<Text style={styles.logoHeart}>♡</Text>MLY
-      </Text>
-      <Text style={[styles.logoTag, { fontSize: tagSize }]}>
-        contigo en cada primer paso
-      </Text>
-    </View>
+    <Image 
+      source={require('../assets/images/logo.png')}
+      style={{ width: 100, height: 40 }}
+      resizeMode="contain"
+    />
   );
 }
 

@@ -1,7 +1,3 @@
-/**
- * RUTA: frontend/app/(home)/index.jsx
- */
-
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity,
@@ -236,6 +232,16 @@ export default function HomeScreen() {
 
         </View>
       </ScrollView>
+      <View style={styles.footerColumnas}>
+        <View style={styles.columnaIzquierda}>
+          <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+          <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+        </View>
+        <View style={styles.columnaDerecha}>
+          <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+          <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -247,7 +253,7 @@ const styles = StyleSheet.create({
   content: { padding: 20, paddingBottom: 40 },
 
   // Banner
-  banner:       { backgroundColor: '#f4a7b9', paddingVertical: 12, alignItems: 'center' },
+  banner:       { backgroundColor: '#F7C6D0', paddingVertical: 12, alignItems: 'center' },
   bannerCenter: { alignItems: 'center' },
   bannerTitle:  { fontSize: 28, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
   bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 2 },
@@ -317,4 +323,11 @@ const styles = StyleSheet.create({
   recentLabel: { fontSize: 13, fontWeight: '700', color: '#2d2d2d' },
   recentSub:   { fontSize: 11, color: '#aaa', marginTop: 1 },
   recentArrow: { marginLeft: 'auto', color: '#F7C6D0 ', fontSize: 14, fontWeight: '700' },
+
+  footerColumnas: { backgroundColor: '#FADBD8', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 8, borderTopWidth: 1, borderTopColor: 'rgba(0,0,0,0.05)' },
+  columnaIzquierda: { flex: 1 },
+  columnaDerecha: { flex: 1, alignItems: 'flex-end' },
+  footerTextMin: { color: '#5D6D7E', fontSize: 20, fontWeight: 'bold' },
+  footerSloganMin: { color: '#04080c', fontSize: 15, opacity: 0.8 },
+  footerLegalMin: { color: '#04080c', fontSize: 15, opacity: 0.7, textAlign: 'right' },
 });
