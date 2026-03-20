@@ -23,6 +23,7 @@ import {
   ScrollView,
   Platform,
   Dimensions,
+  Image,
 } from 'react-native';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -78,16 +79,18 @@ function useScreenWidth() {
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 
 function MomlyLogo({ size = 'md' }) {
-  const fontSize = size === 'sm' ? 17 : 20;
-  const tagSize  = size === 'sm' ? 7.5 : 8.5;
+  const imgWidth  = size === 'sm' ? 80 : 100;
+  const imgHeight = size === 'sm' ? 32 : 40;
 
   return (
-    <View>
-      <Text style={[styles.logoName, { fontSize }]}>
-        M<Text style={styles.logoHeart}>♡</Text>MLY
-      </Text>
-      <Text style={[styles.logoTag, { fontSize: tagSize }]}>
-        contigo en cada primer paso
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flex: 1 }}>
+      <Image
+        source={require('../../assets/images/logo.png')}
+        style={{ width: imgWidth, height: imgHeight }}
+        resizeMode="contain"
+      />
+      <Text style={{ fontSize: 11, color: '#d47a9a', fontWeight: '600' }}>
+        contigo en cada primer paso.
       </Text>
     </View>
   );
