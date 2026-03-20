@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   dropdownLabel:          { fontSize: 13, fontWeight: '600', color: COLORS.textDark },
   dropdownSub:            { fontSize: 11, color: COLORS.textMuted },
   logoutItem:             { },
-  logoutText:             { fontSize: 13, fontWeight: '700', color: COLORS.primary },
+  logoutText:             { fontSize: 13, fontWeight: '700', color: textDark},
 
   premiumBadge:     { backgroundColor: '#fff8e6', borderRadius: 10, paddingHorizontal: 7, paddingVertical: 2, marginLeft: 'auto' },
   premiumBadgeText: { fontSize: 10, fontWeight: '700', color: '#b8860b' },
