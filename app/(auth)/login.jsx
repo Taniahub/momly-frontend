@@ -164,17 +164,21 @@ export default function LoginScreen() {
             )}
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push('/(auth)/olvidaste-password')}>
-            <Text style={styles.olvidasteLink}>¿Olvidaste tu contraseña?</Text>
-          </TouchableOpacity>
+          {/* Olvidaste contraseña */}
+        <TouchableOpacity
+          style={styles.olvidasteContainer}
+          onPress={() => router.push('/(auth)/olvidaste-password')}
+        >
+          <Text style={styles.olvidasteLink}>¿Olvidaste tu contraseña?</Text>
+        </TouchableOpacity>
 
-          {/* Ir a registro */}
-          <View style={styles.registroContainer}>
-            <Text style={styles.registroText}>¿No tienes cuenta? </Text>
-            <TouchableOpacity onPress={() => router.push('/(auth)/registro')}>
-              <Text style={styles.registroLink}>Regístrate aquí</Text>
-            </TouchableOpacity>
-          </View>
+        {/* Ir a registro */}
+        <View style={styles.registroContainer}>
+          <Text style={styles.registroText}>¿No tienes cuenta? </Text>
+          <TouchableOpacity onPress={() => router.push('/(auth)/registro')}>
+            <Text style={styles.registroLink}>Regístrate aquí</Text>
+          </TouchableOpacity>
+        </View>
         </View>
       </View>
 
@@ -396,14 +400,15 @@ slogan: {
   },
 
   olvidasteContainer: {
-  alignItems: 'center',
-  marginTop: 12,
-},
-olvidasteLink: {
-  fontSize: 13,
-  color: colors.primary,
-  fontWeight: '600',
-},
+    alignItems: 'center',
+    marginTop: 14,
+  },
+  olvidasteLink: {
+    fontSize: 13,
+    color: colors.primary,
+    fontWeight: '600',
+  },
+ 
 
   // Footer estilo "App Pro"
   footerColumnas: {
