@@ -43,17 +43,17 @@ const BREAKPOINT = 768; // px — desktop vs mobile
 
 /** All nav sections pulled from the dashboard screenshot */
 export const NAV_ITEMS = [
-  { key: 'home',            label: 'Inicio',                    icon: '🏠' },
-  { key: 'recovery',        label: 'Guías de Recuperación',     icon: '📚', sub: 'Física y emocional' },
-  { key: 'appointments',    label: 'Citas y Recordatorios',     icon: '📅', sub: 'Gestiona tus citas médicas' },
-  { key: 'is-normal',       label: '¿Es Normal?',               icon: '❓', sub: 'Consulta situaciones comunes' },
-  { key: 'emotional',       label: 'Bienestar Emocional',       icon: '💛', sub: 'Monitoreo de tu estado emocional' },
-  { key: 'vaccines',        label: 'Calendario de Vacunación',  icon: '💉', sub: 'Lleva el control de las vacunas' },
-  { key: 'library',         label: 'Biblioteca del bebé',       icon: '📖', sub: 'Lactancia, sueño, alimentación' },
-  { key: 'companion',       label: 'Acompañamiento Emocional',  icon: '🤝', sub: 'Recomendaciones personalizadas' },
-  { key: 'development',     label: 'Desarrollo del Bebé',       icon: '🌱', sub: 'Sugerencias según la etapa' },
-  { key: 'community',       label: 'Comunidad',                 icon: '👩‍👩‍👧', sub: 'Comparte con otras mamás' },
-  { key: 'specialists',     label: 'Especialistas',             icon: '👩‍⚕️', sub: 'Acceso prioritario Premium', premium: true },
+  { key: 'index',           label: 'Inicio',                    icon: '🏠' },
+  { key: 'guias',           label: 'Guías de Recuperación',     icon: '📚', sub: 'Física y emocional' },
+  { key: 'citas',           label: 'Citas y Recordatorios',     icon: '📅', sub: 'Gestiona tus citas médicas' },
+  { key: 'esnormal',        label: '¿Es Normal?',               icon: '❓', sub: 'Consulta situaciones comunes' },
+  { key: 'bienestar',       label: 'Bienestar Emocional',       icon: '💛', sub: 'Monitoreo de tu estado emocional' },
+  { key: 'vacunas',         label: 'Calendario de Vacunación',  icon: '💉', sub: 'Lleva el control de las vacunas' },
+  { key: 'biblioteca',      label: 'Biblioteca del bebé',       icon: '📖', sub: 'Lactancia, sueño, alimentación' },
+  { key: 'acompanamiento',  label: 'Acompañamiento Emocional',  icon: '🤝', sub: 'Recomendaciones personalizadas' },
+  { key: 'sugerencias',     label: 'Desarrollo del Bebé',       icon: '🌱', sub: 'Sugerencias según la etapa' },
+  { key: 'comunidad',       label: 'Comunidad',                 icon: '👩‍👩‍👧', sub: 'Comparte con otras mamás' },
+  { key: 'especialistas',   label: 'Especialistas',             icon: '👩‍⚕️', sub: 'Acceso prioritario Premium', premium: true },
   { key: 'premium',         label: 'Plan Premium',              icon: '⭐', sub: 'Contenido y funciones exclusivas', isPremiumCta: true },
 ];
 

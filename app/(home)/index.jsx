@@ -8,7 +8,7 @@ import {
   StyleSheet, Dimensions,
 } from 'react-native';
 import { router } from 'expo-router';
-import { useAuth } from '../../context/AuthContext';                        // ← real
+import { useAuth } from '../../context/AuthContext';
 import MomlyNavigation, { NAV_ITEMS } from '../../components/MomlyNavigation';
 
 function DashboardCard({ item, onPress }) {
@@ -27,32 +27,31 @@ function DashboardCard({ item, onPress }) {
 }
 
 export default function HomeScreen() {
-  const { user, logout } = useAuth();                                       // ← real
-  const [activeRoute, setActiveRoute] = useState('home');
+  const { user, logout } = useAuth();
+  const [activeRoute, setActiveRoute] = useState('index');
 
   const screenWidth = Dimensions.get('window').width;
   const numColumns  = screenWidth >= 768 ? 3 : 2;
-  const gridItems   = NAV_ITEMS.filter(i => i.key !== 'home' && !i.isPremiumCta);
+  const gridItems   = NAV_ITEMS.filter(i => i.key !== 'index' && !i.isPremiumCta);
 
   const handleNavigate = (key) => {
     setActiveRoute(key);
-    router.push(`/(home)/${key}`);
+    if (key !== 'index') router.push(`/(home)/${key}`); // key === nombre de archivo ✅
   };
+
+  const nombreUsuario = user?.nombre ?? user?.name ?? 'mamá';
 
   return (
     <View style={styles.screen}>
       <MomlyNavigation
-        user={user}
+        user={{ ...user, name: nombreUsuario }}
         onLogout={logout}
         activeRoute={activeRoute}
         onNavigate={handleNavigate}
       />
 
       <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContent}>
-        {/* El nombre viene del backend: puede ser "nombre" o "name" según tu API */}
-        <Text style={styles.greeting}>
-          ¡Hola, {user?.nombre ?? user?.nombre ?? 'mamá'}! 👋
-        </Text>
+        <Text style={styles.greeting}>¡Hola, {nombreUsuario}! 👋</Text>
         <Text style={styles.greetingSub}>Bienvenida a MOMLY 🌸</Text>
         <Text style={styles.sectionTitle}>¿Qué quieres hacer hoy?</Text>
 
