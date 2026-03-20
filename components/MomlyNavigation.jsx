@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   content: { padding: 20, paddingBottom: 40 },
 
   // Banner
-  banner:       { backgroundColor: '#f4a7b9', paddingVertical: 12, alignItems: 'center' },
+  banner:       { backgroundColor: '#F7C6D0', paddingVertical: 12, alignItems: 'center' },
   bannerCenter: { alignItems: 'center' },
   bannerTitle:  { fontSize: 28, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
   bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 2 },

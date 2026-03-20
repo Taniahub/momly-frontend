@@ -5,8 +5,9 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
+
 
 export default function CitasScreen() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function CitasScreen() {
 
   const cargarCitas = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/citas/${id}`);
+      const response = await api.get(`/auth/citas/${id}`);
       setCitas(response.data.data);
     } catch (error) {
       console.error('Error cargando citas:', error);
@@ -104,7 +105,7 @@ export default function CitasScreen() {
       const [dia, mes, anio] = fecha.split('/');
       const hora24 = convertirA24h(hora, ampm);
       const fecha_hora = `${anio}-${mes}-${dia}T${hora24}:00`;
-      await axios.post('http://localhost:3000/api/auth/citas', {
+      await api.post('/auth/citas', {
         id_usuario: usuario.id,
         titulo,
         descripcion,
@@ -132,7 +133,7 @@ export default function CitasScreen() {
       if (!confirmar) return;
     }
     try {
-      await axios.delete(`http://localhost:3000/api/auth/citas/${id_cita}`);
+      await api.delete(`/auth/citas/${id_cita}`);
       cargarCitas(usuario.id);
     } catch (error) {
       console.error('Error eliminando cita:', error);
