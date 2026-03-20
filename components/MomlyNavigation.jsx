@@ -1,7 +1,3 @@
-/**
- * RUTA: frontend/app/(home)/index.jsx
- */
-
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity,
