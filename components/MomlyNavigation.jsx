@@ -93,7 +93,7 @@ export default function HomeScreen() {
 
       // Citas
       if (u?.id) {
-        const { api } = require('../../services/api');
+        const { api } = require('../services/api');
         const resCitas = await api.get(`/auth/citas/${u.id}`);
         setCitas(resCitas.data?.data ?? []);
 
@@ -104,7 +104,7 @@ export default function HomeScreen() {
 
       // Vacunas
       if (b?.id) {
-        const { api } = require('../../services/api');
+        const { api } = require('../services/api');
         const resVac = await api.get(`/auth/vacunas/${b.id}`);
         const todas = resVac.data?.data ?? [];
         setVacunas(todas.filter(v => !v.aplicada));
