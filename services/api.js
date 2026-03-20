@@ -24,6 +24,9 @@ export const authService = {
   registro: (datos) => api.post('/auth/registro', datos),
   registroCompleto: (datos) => api.post('/auth/registro-completo', datos),
   login: (datos) => api.post('/auth/login', datos),
+  solicitarRecuperacion: (data) => api.post('/auth/recuperar-password', data),
+  verificarCodigo: (data)       => api.post('/auth/verificar-codigo', data),
+  restablecerPassword: (data)   => api.post('/auth/restablecer-password', data),
 
   // ✅ ESTA TE FALTABA / OJO a la ruta
   getGuias: () => api.get('/auth/guias'),
