@@ -1,10 +1,3 @@
-/**
- * RUTA DONDE VA ESTE ARCHIVO:
- * frontend/context/AuthContext.jsx
- *
- * (crea la carpeta "context" si no existe dentro de frontend/)
- */
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
