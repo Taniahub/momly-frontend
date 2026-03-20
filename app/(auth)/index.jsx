@@ -102,13 +102,7 @@ export default function LandingScreen() {
 
       {/* Que ofrece (sección completa debajo) */}
       <View style={styles.ofrecemosContainer}>
-        <Text style={styles.ofrecemosTitle}>¿Qué ofrece MOMLY?</Text>
-        {SERVICIOS.map((item, index) => (
-          <View key={index} style={styles.ofrecemosItem}>
-            <Text style={styles.ofrecemosItemText}>{item}</Text>
-          </View>
-        ))}
-
+        
         <TouchableOpacity style={styles.verPlanesBtn}>
           <Text style={styles.verPlanesBtnText}>Ver Planes</Text>
         </TouchableOpacity>
