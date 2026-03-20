@@ -14,6 +14,7 @@ import {
   ScrollView,
   Platform,
   Dimensions,
+  Image,
 } from 'react-native';
 
 const COLORS = {

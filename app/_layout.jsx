@@ -1,8 +1,3 @@
-/**
- * RUTA: frontend/app/_layout.jsx
- * Reemplaza tu _layout.jsx actual con este
- */
-
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider } from '../context/AuthContext';  // ← línea nueva
