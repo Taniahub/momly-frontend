@@ -117,7 +117,7 @@ export default function GaleriaScreen() {
     return (
       <View style={styles.container}>
         <View style={styles.banner}>
-          <TouchableOpacity style={styles.backBtn} onPress={() => setFotoActiva(null)}>
+          <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
             <Text style={styles.backText}>← Volver</Text>
           </TouchableOpacity>
           <View style={styles.bannerCenter}>
@@ -164,7 +164,7 @@ export default function GaleriaScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.banner}>
-          <TouchableOpacity style={styles.backBtn} onPress={() => setFotoActiva(null)}>
+          <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
             <Text style={styles.backText}>← Volver</Text>
           </TouchableOpacity>
           <View style={styles.bannerCenter}>
