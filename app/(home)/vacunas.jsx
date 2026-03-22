@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     height: 8, backgroundColor: colors.primaryPale, borderRadius: 4, marginBottom: 20,
   },
   progressFill: {
-    height: 8, backgroundColor: colors.primary, borderRadius: 4,
+    height: 8, backgroundColor: '#D3A5E3', borderRadius: 4,
   },
 
   tabsContainer: { maxHeight: 50, marginBottom: 20 },
