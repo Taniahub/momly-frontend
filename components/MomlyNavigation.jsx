@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
   premiumBadge:     { backgroundColor: '#fff8e6', borderRadius: 10, paddingHorizontal: 7, paddingVertical: 2, marginLeft: 'auto' },
   premiumBadgeText: { fontSize: 10, fontWeight: '700', color: '#b8860b' },
 
-  mobileHeader:  { backgroundColor: '#FFF1E6', borderBottomWidth: 1, borderBottomColor: COLORS.border, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 18, height: 58, zIndex: 100 },
+  mobileHeader:  { backgroundColor: '#FFF1E6', borderBottomWidth: 1, borderBottomColor: COLORS.border, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 18, height: 58, zIndex: 100, position: 'relative', },
   mobileActions: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   iconBtn:       { width: 36, height: 36, borderRadius: 18, backgroundColor: COLORS.primaryBg, borderWidth: 1, borderColor: COLORS.border, alignItems: 'center', justifyContent: 'center', position: 'relative' },
   hamLines:      { gap: 4, alignItems: 'flex-end' },
@@ -329,11 +329,11 @@ const styles = StyleSheet.create({
   hamLine2:      { width: 12 },
   hamLine3:      { width: 16 },
 
-  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(232,51,109,0.08)', zIndex: 150 },
+  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(232,51,109,0.08)', zIndex: 999 },
 
   sidebar: {
     position: 'absolute', top: 0, right: 0, width: 280, height: '100%',
-    backgroundColor: COLORS.white, borderLeftWidth: 1, borderLeftColor: COLORS.border, zIndex: 200,
+    backgroundColor: COLORS.white, borderLeftWidth: 1, borderLeftColor: COLORS.border, zIndex: 1000,
     ...Platform.select({ web: { boxShadow: '-4px 0 20px rgba(232,51,109,0.08)' }, default: { elevation: 8 } }),
   },
   sidebarHeader:     { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 16, borderBottomWidth: 1, borderBottomColor: COLORS.border, backgroundColor: COLORS.primaryBg },
