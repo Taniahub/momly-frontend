@@ -52,16 +52,7 @@ export default function GuiasScreen() {
   if (guiaSeleccionada) {
     return (
       <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Image
-            source={require('../../assets/images/logo.png')}
-            style={styles.logoImagen}
-            resizeMode="contain"
-          />
-          <Text style={styles.slogan}>contigo en cada primer paso.</Text>
-        </View>
-
+        
         {/* Banner con ← Volver que regresa a la lista de guías */}
         <Banner onBack={() => setGuiaSeleccionada(null)} />
 
