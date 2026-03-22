@@ -163,6 +163,17 @@ export default function GaleriaScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.banner}>
+          <TouchableOpacity style={styles.backBtn} onPress={() => setFotoActiva(null)}>
+            <Text style={styles.backText}>← Volver</Text>
+          </TouchableOpacity>
+          <View style={styles.bannerCenter}>
+            <Text style={styles.bannerTitle}>MOMLY</Text>
+            <Text style={styles.bannerSlogan}>Galeria de Recuerdos</Text>
+          </View>
+          <View style={styles.backPlaceholder} />
+        </View>
+
            <ScrollView contentContainerStyle={styles.content}>
 
         <TouchableOpacity
