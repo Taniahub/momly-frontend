@@ -152,12 +152,11 @@ export default function GaleriaScreen() {
                     <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
                     <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
                 </View>
-                                    
                 <View style={styles.columnaDerecha}>
                     <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
                     <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
                 </View>
-            </View>
+                </View>
       </View>
     );
   }

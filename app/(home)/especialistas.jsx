@@ -359,9 +359,16 @@ export default function EspecialistasScreen() {
         )}
       </ScrollView>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>🌸 MOMLY — contigo en cada primer paso</Text>
-      </View>
+      <View style={styles.footerColumnas}>
+              <View style={styles.columnaIzquierda}>
+                  <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+                  <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+              </View>
+              <View style={styles.columnaDerecha}>
+                  <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+                  <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+              </View>
+              </View>
     </View>
   );
 }
@@ -383,7 +390,7 @@ const styles = StyleSheet.create({
   bannerTitle: { fontSize: 28, fontWeight: 'bold', color: '#5e5d5d', letterSpacing: 4 },
   bannerSlogan: { fontSize: 12, color: '#5e5d5d', marginTop: 2 },
   backPlaceholder: { width: 80 },
-  
+
   premiumBanner: {
     backgroundColor: '#FFF3E0', padding: 12, flexDirection: 'row',
     justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20,
