@@ -171,8 +171,8 @@ function MobileNav({ activeRoute, onNavigate, user, onLogout }) {
   const openMenu = useCallback(() => {
     setOpen(true);
     Animated.parallel([
-      Animated.spring(slideAnim,   { toValue: 0,   useNativeDriver: true, tension: 65, friction: 11 }),
-      Animated.timing(overlayAnim, { toValue: 1,   useNativeDriver: true, duration: 220 }),
+      Animated.spring(slideAnim,   { toValue: 0,   useNativeDriver: false, tension: 65, friction: 11 }),
+      Animated.timing(overlayAnim, { toValue: 1,   useNativeDriver: false, duration: 220 }),
     ]).start();
   }, [slideAnim, overlayAnim]);
 
@@ -180,13 +180,13 @@ function MobileNav({ activeRoute, onNavigate, user, onLogout }) {
     Animated.parallel([
       Animated.spring(slideAnim, { 
         toValue: Dimensions.get('window').width, 
-        useNativeDriver: true, 
+        useNativeDriver: false, 
         tension: 65, 
         friction: 11 
       }),
       Animated.timing(overlayAnim, { 
         toValue: 0, 
-        useNativeDriver: true, 
+        useNativeDriver: false, 
         duration: 200 
       }),
     ]).start(() => setOpen(false));
