@@ -5,8 +5,8 @@ import {
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { colors } from '../../constants/colors';
+import { api } from '../../services/api';
 
 export default function GaleriaScreen() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function GaleriaScreen() {
 
   const cargarFotos = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/galeria/${id}`);
+      const response = await api.get(`/auth/galeria/${id}`);
       setFotos(response.data.data);
     } catch (error) {
       console.error('Error cargando fotos:', error);
@@ -68,7 +68,7 @@ export default function GaleriaScreen() {
     if (!fotoSeleccionada) return;
     setLoadingSubir(true);
     try {
-      await axios.post('http://localhost:3000/api/auth/galeria', {
+      await api.post('/auth/galeria', {
         id_usuario: usuario.id,
         imagen_base64: fotoSeleccionada,
         descripcion,
@@ -90,7 +90,7 @@ export default function GaleriaScreen() {
       if (!confirmar) return;
     }
     try {
-      await axios.delete(`http://localhost:3000/api/auth/galeria/${id_foto}`);
+      await api.delete(`/auth/galeria/${id_foto}`);
       setFotoActiva(null);
       cargarFotos(usuario.id);
     } catch (error) {
