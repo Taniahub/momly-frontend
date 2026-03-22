@@ -220,7 +220,53 @@ function MobileNav({ activeRoute, onNavigate, user, onLogout }) {
     <Pressable style={StyleSheet.absoluteFill} onPress={closeMenu} />
   </Animated.View>
   <Animated.View style={[styles.sidebar, { transform: [{ translateX: slideAnim }] }]}>
-    {/* todo el contenido del sidebar igual */}
+    <View style={styles.sidebarHeader}>
+      <View style={styles.sidebarAvatar}>
+        <Text style={styles.sidebarAvatarText}>{initial}</Text>
+      </View>
+      <View>
+        <Text style={styles.sidebarName}>{user?.name ?? 'Usuario'}</Text>
+        <Text style={styles.sidebarEmail}>{user?.correo ?? user?.email ?? ''}</Text>
+        <View style={styles.planBadge}>
+          <Text style={styles.planBadgeText}>✨ Plan Free</Text>
+        </View>
+      </View>
+    </View>
+    <ScrollView style={styles.sidebarScroll} showsVerticalScrollIndicator={false}>
+      <Text style={styles.sectionLabel}>PRINCIPAL</Text>
+      {NAV_ITEMS.filter(i => !i.isPremiumCta).map(item => (
+        <TouchableOpacity
+          key={item.key}
+          style={[styles.sidebarItem, activeRoute === item.key && styles.sidebarItemActive]}
+          onPress={() => navigate(item.key)}
+        >
+          <View style={[styles.sidebarIconWrap, activeRoute === item.key && styles.sidebarIconWrapActive]}>
+            <Text style={{ fontSize: 16 }}>{item.icon}</Text>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.sidebarItemLabel, activeRoute === item.key && styles.sidebarItemLabelActive]}>
+              {item.label}
+            </Text>
+            {item.sub && <Text style={styles.sidebarItemSub} numberOfLines={1}>{item.sub}</Text>}
+          </View>
+          {item.premium && (
+            <View style={styles.premiumBadge}>
+              <Text style={styles.premiumBadgeText}>Premium</Text>
+            </View>
+          )}
+        </TouchableOpacity>
+      ))}
+      <TouchableOpacity style={styles.premiumCta} onPress={() => navigate('premium')}>
+        <Text style={styles.premiumCtaText}>⭐ Mejorar a Premium</Text>
+      </TouchableOpacity>
+      <View style={{ height: 16 }} />
+    </ScrollView>
+    <View style={styles.sidebarFooter}>
+      <TouchableOpacity style={styles.logoutBtn} onPress={onLogout}>
+        <Text style={{ fontSize: 16 }}>🚪</Text>
+        <Text style={styles.logoutBtnText}>Cerrar sesión</Text>
+      </TouchableOpacity>
+    </View>
   </Animated.View>
 </Modal>
     </View>
