@@ -165,7 +165,7 @@ function UserMenu({ user, onLogout, onNavigate }) {
 
 function MobileNav({ activeRoute, onNavigate, user, onLogout }) {
   const [open, setOpen]  = useState(false);
-  const slideAnim        = useState(new Animated.Value(280))[0];
+  const slideAnim = useState(new Animated.Value(Dimensions.get('window').width))[0];
   const overlayAnim      = useState(new Animated.Value(0))[0];
 
   const openMenu = useCallback(() => {
@@ -178,8 +178,17 @@ function MobileNav({ activeRoute, onNavigate, user, onLogout }) {
 
   const closeMenu = useCallback(() => {
     Animated.parallel([
-      Animated.spring(slideAnim,   { toValue: 280, useNativeDriver: true, tension: 65, friction: 11 }),
-      Animated.timing(overlayAnim, { toValue: 0,   useNativeDriver: true, duration: 200 }),
+      Animated.spring(slideAnim, { 
+        toValue: Dimensions.get('window').width, 
+        useNativeDriver: true, 
+        tension: 65, 
+        friction: 11 
+      }),
+      Animated.timing(overlayAnim, { 
+        toValue: 0, 
+        useNativeDriver: true, 
+        duration: 200 
+      }),
     ]).start(() => setOpen(false));
   }, [slideAnim, overlayAnim]);
 
