@@ -302,9 +302,9 @@ const styles = StyleSheet.create({
   ctaIcon:       { width: 38, height: 38, borderRadius: 10, backgroundColor: '#fff0f5', alignItems: 'center', justifyContent: 'center' },
   ctaIconPrimary:{ backgroundColor: 'rgba(255,255,255,0.2)' },
   ctaLabel:      { fontSize: 12, fontWeight: '800', color: '#2d2d2d' },
-  ctaLabelPrimary:{ color: '#fff' },
+  ctaLabelPrimary:{ color: '#5e5d5d' },
   ctaSub:        { fontSize: 11, color: '#aaa', marginTop: 1 },
-  ctaSubPrimary: { color: 'rgba(255,255,255,0.75)' },
+  ctaSubPrimary: { color: '#888' },
 
   // Recientes
   recentList: { gap: 8 },
