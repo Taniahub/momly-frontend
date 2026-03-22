@@ -14,6 +14,7 @@ export default function HomeLayout() {
       <Stack.Screen name="premium" />
       <Stack.Screen name="comunidad" />
       <Stack.Screen name="especialistas" />
+      <Stack.Screen name="galeria" />
     </Stack>
   );
 }

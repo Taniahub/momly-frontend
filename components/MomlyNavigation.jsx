@@ -42,9 +42,10 @@ export const NAV_ITEMS = [
   { key: 'acompanamiento',  label: 'Acompañamiento Emocional',  icon: '🤝', sub: 'Recomendaciones personalizadas' },
   { key: 'sugerencias',     label: 'Desarrollo del Bebé',       icon: '🌱', sub: 'Sugerencias según la etapa' },
   { key: 'comunidad',       label: 'Comunidad',                 icon: '👩‍👩‍👧', sub: 'Comparte con otras mamás' },
+  { key: 'galeria', label: 'Galería de Recuerdos', icon: '📸', sub: 'Fotos especiales de tu bebé' },
   { key: 'especialistas',   label: 'Especialistas',             icon: '👩‍⚕️', sub: 'Acceso prioritario Premium', premium: true },
   { key: 'premium',         label: 'Plan Premium',              icon: '⭐', sub: 'Contenido y funciones exclusivas', isPremiumCta: true },
-];
+  ];
 
 const DESKTOP_VISIBLE = ['index', 'guias', 'citas', 'bienestar', 'vacunas', 'biblioteca'];
 

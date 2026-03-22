@@ -227,6 +227,7 @@ export default function HomeScreen() {
               <RecentItem icon="📖" label="Biblioteca del bebé"     sub="Lactancia, sueño y más"     onPress={() => handleNavigate('biblioteca')} />
               <RecentItem icon="🌱" label="Desarrollo del bebé"     sub="Sugerencias para tu etapa"  onPress={() => handleNavigate('sugerencias')} />
               <RecentItem icon="👩‍👩‍👧" label="Comunidad MOMLY"        sub="Comparte con otras mamás"   onPress={() => handleNavigate('comunidad')} />
+              <RecentItem icon="📸" label="Galería de Recuerdos" sub="Fotos especiales de tu bebé" onPress={() => handleNavigate('galeria')} />
             </View>
           </View>
 
