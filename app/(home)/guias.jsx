@@ -74,17 +74,7 @@ export default function GuiasScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Image
-          source={require('../../assets/images/logo.png')}
-          style={styles.logoImagen}
-          resizeMode="contain"
-        />
-        <Text style={styles.slogan}>contigo en cada primer paso.</Text>
-      </View>
-
-      {/* Banner con ← Volver que regresa al home */}
+     
       <Banner onBack={() => router.replace('/(home)')} />
 
       {loading ? (
