@@ -116,7 +116,17 @@ export default function GaleriaScreen() {
   if (fotoActiva) {
     return (
       <View style={styles.container}>
-        
+        <View style={styles.banner}>
+          <TouchableOpacity style={styles.backBtn} onPress={() => setFotoActiva(null)}>
+            <Text style={styles.backText}>← Volver</Text>
+          </TouchableOpacity>
+          <View style={styles.bannerCenter}>
+            <Text style={styles.bannerTitle}>MOMLY</Text>
+            <Text style={styles.bannerSlogan}>Galeria de Recuerdos</Text>
+          </View>
+          <View style={styles.backPlaceholder} />
+        </View>
+
         <ScrollView contentContainerStyle={styles.content}>
           <View style={styles.fotoDetalleCard}>
             <img
@@ -153,18 +163,7 @@ export default function GaleriaScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.banner}>
-        <TouchableOpacity style={styles.backBtn} onPress={() => router.replace('/(home)')}>
-          <Text style={styles.backText}>← Volver</Text>
-        </TouchableOpacity>
-        <View style={styles.bannerCenter}>
-          <Text style={styles.bannerTitle}>M🌸MLY</Text>
-          <Text style={styles.bannerSlogan}>Galeria de Recuerdos</Text>
-        </View>
-        <View style={styles.backPlaceholder} />
-      </View>
-
-      <ScrollView contentContainerStyle={styles.content}>
+           <ScrollView contentContainerStyle={styles.content}>
 
         <TouchableOpacity
           style={styles.btnAgregar}
@@ -248,9 +247,16 @@ export default function GaleriaScreen() {
 
       </ScrollView>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>🌸 MOMLY — contigo en cada primer paso</Text>
-      </View>
+      <View style={styles.footerColumnas}>
+              <View style={styles.columnaIzquierda}>
+                <Text style={styles.footerTextMin}>🌸 MOMLY</Text>
+                <Text style={styles.footerSloganMin}>contigo en cada primer paso.</Text>
+              </View>
+              <View style={styles.columnaDerecha}>
+                <Text style={styles.footerLegalMin}>© 2026 • Privacidad</Text>
+                <Text style={styles.footerLegalMin}>Términos y condiciones</Text>
+              </View>
+            </View>
     </View>
   );
 }
