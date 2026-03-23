@@ -124,7 +124,7 @@ export default function HomeScreen() {
     ? proximasCitas.map(c => c.descripcion ?? c.titulo ?? 'Cita programada').join(' · ')
     : null;
 
-  const bienestarScore = bienestar?.nivel ?? bienestar?.puntuacion ?? null;
+  const bienestarScore = bienestar?.estado_emocional ?? null;
 
   return (
     <View style={styles.screen}>
@@ -172,10 +172,10 @@ export default function HomeScreen() {
           />
           <MetricCard
             icon="💛"
-            value={bienestarScore ? `${bienestarScore}/10` : '—'}
+            value={bienestarScore ?? '—'}
             label="Bienestar hoy"
-            badge={bienestarScore ? (bienestarScore >= 7 ? 'Bien' : 'Regular') : 'Sin registro'}
-            badgeType={bienestarScore >= 7 ? 'ok' : 'warn'}
+            badge={bienestarScore ? 'Registrado' : 'Sin registro'}
+            badgeType={bienestarScore ? 'ok' : 'warn'}
           />
           <MetricCard
             icon="📅"
