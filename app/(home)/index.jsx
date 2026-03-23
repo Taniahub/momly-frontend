@@ -99,7 +99,7 @@ export default function HomeScreen() {
 
         const resBienestar = await api.get(`/auth/bienestar/${u.id}`);
         const registros = resBienestar.data?.data ?? [];
-        if (registros.length > 0) setBienestar(registros[registros.length - 1]);
+        if (registros.length > 0) setBienestar(registros[0]);
       }
 
       // Vacunas
