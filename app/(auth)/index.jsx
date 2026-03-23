@@ -103,7 +103,10 @@ export default function LandingScreen() {
       {/* Que ofrece (sección completa debajo) */}
       <View style={styles.ofrecemosContainer}>
         
-        <TouchableOpacity style={styles.verPlanesBtn}>
+        <TouchableOpacity 
+          style={styles.verPlanesBtn}
+          onPress={() => router.push('/(home)/premium')} // ← agrega esto
+        >
           <Text style={styles.verPlanesBtnText}>Ver Planes</Text>
         </TouchableOpacity>
       </View>
