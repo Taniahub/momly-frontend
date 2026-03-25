@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '../../constants/colors';
 import { api } from '../../services/api';
+import * as ImagePicker from 'expo-image-picker';
+import { Image } from 'react-native';
 
 export default function GaleriaScreen() {
   const router = useRouter();
@@ -47,7 +49,8 @@ export default function GaleriaScreen() {
     }
   };
 
-  const seleccionarFoto = () => {
+const seleccionarFoto = async () => {
+  if (Platform.OS === 'web') {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -55,14 +58,31 @@ export default function GaleriaScreen() {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = (event) => {
-          setFotoSeleccionada(event.target.result);
-        };
+        reader.onload = (event) => setFotoSeleccionada(event.target.result);
         reader.readAsDataURL(file);
       }
     };
     input.click();
-  };
+  } else {
+    const permiso = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permiso.granted) {
+      alert('Permiso requerido');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      base64: true,
+      quality: 0.7,
+    });
+
+    if (!result.canceled) {
+      const asset = result.assets[0];
+      setFotoSeleccionada(`data:${asset.mimeType || 'image/jpeg'};base64,${asset.base64}`);
+    }
+  }
+};
 
   const handleSubir = async () => {
     if (!fotoSeleccionada) return;
@@ -129,10 +149,10 @@ export default function GaleriaScreen() {
 
         <ScrollView contentContainerStyle={styles.content}>
           <View style={styles.fotoDetalleCard}>
-            <img
-              src={fotoActiva.url_imagen}
-              alt={fotoActiva.descripcion || 'Foto'}
-              style={{ width: '100%', borderRadius: 16, marginBottom: 16, maxHeight: 400, objectFit: 'contain', backgroundColor: '#f9f9f9' }}
+            <Image
+              source={{ uri: fotoActiva.url_imagen }}
+              style={{ width: '100%', height: 400, borderRadius: 16 }}
+              resizeMode="contain"
             />
             {fotoActiva.descripcion ? (
               <Text style={styles.fotoDetalleDesc}>{fotoActiva.descripcion}</Text>
@@ -191,10 +211,9 @@ export default function GaleriaScreen() {
 
             <TouchableOpacity style={styles.btnSeleccionar} onPress={seleccionarFoto}>
               {fotoSeleccionada ? (
-                <img
-                  src={fotoSeleccionada}
-                  alt="preview"
-                  style={{ width: '100%', height: 200, objectFit: 'contain', borderRadius: 12, backgroundColor: '#f9f9f9' }}
+                <Image 
+                  source={{ uri: fotoSeleccionada }} 
+                  style={{ width: '100%', height: 200, borderRadius: 12 }} 
                 />
               ) : (
                 <View style={styles.placeholderFoto}>
@@ -242,10 +261,9 @@ export default function GaleriaScreen() {
                 style={styles.gridItem}
                 onPress={() => setFotoActiva(foto)}
               >
-                <img
-                  src={foto.url_imagen}
-                  alt={foto.descripcion || 'Foto'}
-                  style={{ width: '100%', height: 150, objectFit: 'contain', borderRadius: 12, backgroundColor: '#f9f9f9' }}
+                <Image
+                  source={{ uri: foto.url_imagen }}
+                  style={{ width: '100%', height: 150, borderRadius: 12 }}
                 />
                 {foto.descripcion ? (
                   <Text style={styles.gridItemDesc} numberOfLines={1}>{foto.descripcion}</Text>
